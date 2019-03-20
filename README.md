@@ -9,12 +9,11 @@ Data Structures and Algorithms
 These DSA classes are my JavaScript implementations of pseudocode found in [Data Structures and Algorithms: Annotated Referene with Examples - First Edition](http://www.freetechbooks.com/dotnetslackers-p1936.html)  
 Granville Barnett and Luca Del Tongo 2008
 
-
-
-[![Build Status]()]()
+[![Build Status](https://travis-ci.com/jaredpattison/dsa.svg?branch=master)](https://travis-ci.com/jaredpattison/dsa)
 
 * [repo](https://github.com/jaredpattison/dsa)
-* [travis]()
+* [travis](https://travis-ci.com/jaredpattison/dsa)
+
 
 --- 
 
