@@ -3,14 +3,6 @@ Singly Linked Lists
 
 
 ### Author: Jared Pattison
-
-### Links and Resources
-
-[![Build Status]()]()
-
-* [repo](https://github.com/jaredpattison/dsa)
-* [travis]()
-
 --- 
 
 ---
