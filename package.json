@@ -1,0 +1,24 @@
+{
+  "name": "dsa",
+  "version": "1.0.0",
+  "description": "Data Structures and Algorithms",
+  "main": "jest.config.js",
+  "scripts": {
+    "test": "jest --verbose --coverage",
+    "test-watch": "jest --watchAll --verbose --coverage"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jaredpattison/dsa.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jaredpattison/dsa/issues"
+  },
+  "homepage": "https://github.com/jaredpattison/dsa#readme",
+  "dependencies": {
+    "eslint": "^5.15.3",
+    "jest": "^24.5.0"
+  }
+}
