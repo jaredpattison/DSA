@@ -1,39 +1,33 @@
 'use strict';
-
-const Node = require('./singly-linked-list-node.js');
-const util = require('util');
-
+exports.__esModule = true;
+var Node = require("./singly-linked-list-node.js");
+var util = require("util");
 // Node based implementation of a linked list where every node has only a reference to the next node
-class SinglyLinkedList {
-
-  constructor() {
-    this.head = null;
-    this.tail = null;
-  }
-
-  addLast(value) {
-    let n = new Node(value);
-
-    if(!this.head) {
-      this.head = n;
-      this.tail = n;
-    } 
-    
-    else {
-      this.tail.next = n;
-      this.tail = n;
+var SinglyLinkedList = /** @class */ (function () {
+    function SinglyLinkedList() {
+        this.head = null;
+        this.tail = null;
     }
-  }
-
-  print() {
-    if(!this.head) {
-      console.log('empty list');
-      return null;
-    }
-    console.log(util.inspect(this, {depth: this.length}));
-  }
-}
-
+    SinglyLinkedList.prototype.addLast = function (value) {
+        var n = new Node(value);
+        if (!this.head) {
+            this.head = n;
+            this.tail = n;
+        }
+        else {
+            this.tail.next = n;
+            this.tail = n;
+        }
+    };
+    SinglyLinkedList.prototype.print = function () {
+        if (!this.head) {
+            console.log('empty list');
+            return null;
+        }
+        console.log(util.inspect(this, { depth: this.length }));
+    };
+    return SinglyLinkedList;
+}());
 module.exports = SinglyLinkedList;
 
 // let testList = new SinglyLinkedList();
