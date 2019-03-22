@@ -6,7 +6,7 @@ Data Structures and Algorithms
 
 ### Links and Resources
 
-These DSA classes are my JavaScript implementations of pseudocode found in [Data Structures and Algorithms: Annotated Referene with Examples - First Edition](http://www.freetechbooks.com/dotnetslackers-p1936.html)  
+These DSA classes are my TypeScript implementations of pseudocode found in [Data Structures and Algorithms: Annotated Referene with Examples - First Edition](http://www.freetechbooks.com/dotnetslackers-p1936.html)  
 Granville Barnett and Luca Del Tongo 2008
 
 [![Build Status](https://travis-ci.com/jaredpattison/dsa.svg?branch=master)](https://travis-ci.com/jaredpattison/dsa)
@@ -21,12 +21,7 @@ Granville Barnett and Luca Del Tongo 2008
 
 
 ### Testing
-
-The linked-list folder holds all files that define the linked list class:
-
-Tests are written for the LinkedList class methods and can be found here:
-
-All testing for this class was done with Jest: 
+All testing was done with Jest: 
 * [Jest docs](https://jestjs.io/docs/en/getting-started)
 
 Instructions for replicating the tests for this project are as follows:
@@ -60,11 +55,10 @@ Instructions for replicating the tests for this project are as follows:
     }
     ```
     `test-watch` will re-run tests when the file is saved
-
-
 ---
 
 ### Dependencies
 
 * jest: `npm i jest`
+* typescript: `npm i typescript`
 
