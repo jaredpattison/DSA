@@ -55,4 +55,245 @@ describe('singly linked list class', () => {
       expect(expected).toEqual(result);
     });
   });
+
+  describe('contains method', () => {
+
+    it('returns true for valid input', () => {
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.addLast(7);
+      list.addLast(6);
+      let result = list.contains(7);
+
+      let expected = true;
+
+      expect(expected).toEqual(result);
+    });
+
+    
+    it('returns false for invalid input', () => {
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.addLast(7);
+      list.addLast(6);
+      let result = list.contains(13);
+
+      let expected = false;
+
+      expect(expected).toEqual(result);
+    });
+
+    
+    it('can handle empty list', () => {
+      let list = new SinglyLinkedList();
+      let result = list.contains(7);
+
+      let expected = false;
+
+      expect(expected).toEqual(result);
+    });
+  });
+
+  describe('remove method', () => {
+
+    it('can remove head node', () => {
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.addLast(7);
+      list.addLast(6);
+      list.remove(8);
+
+      let expected = new SinglyLinkedList();
+      expected.addLast(7);
+      expected.addLast(6);
+      
+      expect(expected).toEqual(list);
+    });
+
+    it('can remove tail node', () => {
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.addLast(7);
+      list.addLast(6);
+      list.remove(6);
+
+      let expected = new SinglyLinkedList();
+      expected.addLast(8);
+      expected.addLast(7);
+      
+      expect(expected).toEqual(list);
+    });
+
+    it('can remove middle node', () => {
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.addLast(7);
+      list.addLast(6);
+      list.remove(7);
+
+      let expected = new SinglyLinkedList();
+      expected.addLast(8);
+      expected.addLast(6);
+      
+      expect(expected).toEqual(list);
+    });
+
+    it('can remove head and tail node', () => {
+      let list = new SinglyLinkedList();
+      list.addLast(6);
+      list.remove(6);
+
+      let expected = new SinglyLinkedList();
+      
+      expect(expected).toEqual(list);
+    });
+
+    it('can handle value not found', () => {
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.addLast(7);
+      list.addLast(6);
+      list.remove(11);
+
+      let expected = new SinglyLinkedList();
+      expected.addLast(8);
+      expected.addLast(7);
+      expected.addLast(6);
+
+      expect(expected).toEqual(list);
+    });
+
+    it('can handle empty list', () => {
+      let list = new SinglyLinkedList();
+      list.remove(18);
+
+      let expected = new SinglyLinkedList();
+
+      expect(expected).toEqual(list);
+    });
+  });
+
+  describe('print method', () => {
+
+    it('can print multiple elements in correct order', () => {
+      console.log = jest.fn();
+
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.addLast(7);
+      list.addLast(6);
+      list.print();
+
+      let expected1 = 8;
+      let expected2 = 7;
+      let expected3 = 6;
+
+      expect(console.log.mock.calls[0][0]).toEqual(expected1);
+      expect(console.log.mock.calls[1][0]).toEqual(expected2);
+      expect(console.log.mock.calls[2][0]).toEqual(expected3);
+    });
+
+    it('can handle one element', () => {
+      console.log = jest.fn();
+
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.print();
+
+      let expected = 8;
+
+      expect(console.log.mock.calls[0][0]).toEqual(expected);
+    });
+
+    it('can handle zero elements', () => {
+      console.log = jest.fn();
+
+      let list = new SinglyLinkedList();
+      list.print();
+
+      let expected = undefined;
+
+      expect(console.log.mock.calls[0]).toEqual(expected);
+    });
+  });
+
+  describe('printArray method', () => {
+
+    it('can print array of multiple elements in correct order', () => {
+      console.log = jest.fn();
+
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.addLast(7);
+      list.addLast(6);
+      list.printArray();
+
+      let expected = [ 8, 7, 6 ];
+
+      expect(console.log.mock.calls[0][0]).toEqual(expected);
+    });
+
+    it('can handle one element', () => {
+      console.log = jest.fn();
+
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.printArray();
+
+      let expected = [ 8 ];
+
+      expect(console.log.mock.calls[0][0]).toEqual(expected);
+    });
+
+    it('can handle zero elements', () => {
+      console.log = jest.fn();
+
+      let list = new SinglyLinkedList();
+      list.printArray();
+
+      let expected = [];
+
+      expect(console.log.mock.calls[0][0]).toEqual(expected);
+    });
+  });
+
+  describe('printObject method', () => {
+
+    it('can print object with multiple elements in correct order', () => {
+      console.log = jest.fn();
+
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.addLast(7);
+      list.addLast(6);
+      list.printObject();
+
+      let expected = "SinglyLinkedList {\n  head:\n   Node {\n     value: 8,\n     next: Node { value: 7, next: Node { value: 6, next: null } } },\n  tail: Node { value: 6, next: null } }";
+
+      expect(console.log.mock.calls[0][0]).toEqual(expected);
+    });
+
+    it('can handle one element', () => {
+      console.log = jest.fn();
+
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.printObject();
+
+      let expected = "SinglyLinkedList {\n  head: Node { value: 8, next: null },\n  tail: Node { value: 8, next: null } }";
+
+      expect(console.log.mock.calls[0][0]).toEqual(expected);
+    });
+
+    it('can handle zero elements', () => {
+      console.log = jest.fn();
+
+      let list = new SinglyLinkedList();
+      list.printObject();
+
+      let expected = "SinglyLinkedList { head: null, tail: null }";
+
+      expect(console.log.mock.calls[0][0]).toEqual(expected);
+    });
+  });
 });
