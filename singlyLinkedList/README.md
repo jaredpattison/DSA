@@ -28,3 +28,4 @@ Tests are written for the singlyLinkedList class methods and can be found here:
 ```
 singlyLinkedList\__tests__\singly-linked-list-test.js
 ```
+One of the printObject tests has been commented out as it passes locally but fails is Travis for an unkown reason 
