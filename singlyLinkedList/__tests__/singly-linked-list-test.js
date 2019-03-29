@@ -56,6 +56,71 @@ describe('singly linked list class', () => {
     });
   });
 
+  describe('addFirst method', () => {
+
+    it('can add a first node', () => {
+      let node1 = {value: 9, next: null};
+      let expected = {head: node1, tail: node1};
+      let result = new SinglyLinkedList();
+      result.addFirst(9);
+      expect(expected).toEqual(result);
+    });
+
+    it('can add a second node', () => {
+      let node2 = {value: 10, next: null};
+      let node1 = {value: 9, next: node2};
+      let expected = {head: node1, tail: node2};
+      let result = new SinglyLinkedList();
+      result.addFirst(10);
+      result.addFirst(9);
+      expect(expected).toEqual(result);
+    });
+
+    it('can accept multiple parameters', () => {
+      let node1 = {value: 6, next: null};
+      let expected = {head: node1, tail: node1};
+      let result = new SinglyLinkedList();
+      result.addFirst(6, 99);
+      expect(expected).toEqual(result);
+    });
+
+    it('can accept no paramaters', () => {
+      let node1 = {value: undefined, next: null};
+      let expected = {head: node1, tail: node1};
+      let result = new SinglyLinkedList();
+      result.addFirst();
+      expect(expected).toEqual(result);
+    });
+  });
+
+  describe('is empty method', () => {
+
+    it('returns true for an empty list', () => {
+      let list = new SinglyLinkedList;
+      let result = list.isEmpty();
+
+      expect(result).toBeTruthy();
+    });
+
+    it('returns false for a list with one node', () => {
+      let list = new SinglyLinkedList;
+      list.addFirst(8);
+      let result = list.isEmpty();
+
+      expect(result).toBeFalsy();
+    });
+
+    it('returns false for a list with one node', () => {
+      let list = new SinglyLinkedList;
+      list.addFirst(8);
+      list.addFirst(6);
+      list.addFirst(9);
+      let result = list.isEmpty();
+
+      expect(result).toBeFalsy();
+    });
+
+  })
   describe('contains method', () => {
 
     it('returns true for valid input', () => {
@@ -258,20 +323,20 @@ describe('singly linked list class', () => {
   });
 
   describe('printObject method', () => {
-    // The following test passes locally but fails in Travis
-    // it('can print object with multiple elements in correct order', () => {
-    //   console.log = jest.fn();
+    // The following test passes locally but fails in travis, ad 'x' prior to 'it' to skip, 'xit'
+    xit('can print object with multiple elements in correct order', () => {
+      console.log = jest.fn();
 
-    //   let list = new SinglyLinkedList();
-    //   list.addLast(8);
-    //   list.addLast(7);
-    //   list.addLast(6);
-    //   list.printObject();
+      let list = new SinglyLinkedList();
+      list.addLast(8);
+      list.addLast(7);
+      list.addLast(6);
+      list.printObject();
 
-    //   let expected = "SinglyLinkedList {\n  head:\n   Node {\n     value: 8,\n     next: Node { value: 7, next: Node { value: 6, next: null } } },\n  tail: Node { value: 6, next: null } }";
+      let expected = "SinglyLinkedList {\n  head:\n   Node {\n     value: 8,\n     next: Node { value: 7, next: Node { value: 6, next: null } } },\n  tail: Node { value: 6, next: null } }";
 
-    //   expect(console.log.mock.calls[0][0]).toEqual(expected);
-    // });
+      expect(console.log.mock.calls[0][0]).toEqual(expected);
+    });
 
     it('can handle one element', () => {
       console.log = jest.fn();

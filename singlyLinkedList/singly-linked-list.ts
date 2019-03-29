@@ -27,6 +27,24 @@ class SinglyLinkedList {
     }
   }
 
+  addFirst(value) {
+    let n = new Node(value);
+
+    if(this.isEmpty()) {
+      this.head = n;
+      this.tail = n;
+    }
+
+    else {
+      n.next = this.head;
+      this.head = n;
+    }
+  }
+
+  isEmpty() {
+    return this.head === null;
+  }
+
   contains(value) {
     let n = this.head;
 
