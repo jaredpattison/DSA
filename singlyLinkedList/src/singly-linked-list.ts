@@ -2,8 +2,11 @@
 
 import Node = require('./singly-linked-list-node.js');
 import util = require('util');
+import { isEmptyBindingElement } from 'typescript';
+import { cursorTo } from 'readline';
 
 // Node based implementation of a linked list where every node has only a reference to the next node
+// Maintaining head and tail pointers make insertion at either head or tail a constant time operation
 class SinglyLinkedList {
   private head: Node;
   private tail: Node;
@@ -12,11 +15,19 @@ class SinglyLinkedList {
     this.head = null;
     this.tail = null;
   }
+// Insertion in a linked list implicitly refers to adding a node to the tail
+  add(value) { 
+    this.addLast(value);
+  }
+
+  isEmpty() {
+    return this.head === null;
+  }
 
   addLast(value) {
     let n = new Node(value);
 
-    if (!this.head) {
+    if (this.isEmpty()) {
       this.head = n;
       this.tail = n;
     } 
@@ -41,8 +52,54 @@ class SinglyLinkedList {
     }
   }
 
-  isEmpty() {
-    return this.head === null;
+  addAfter(value, target) {
+
+    if (this.isEmpty()) {return false;}
+    
+    let n = new Node(value);
+    // target node is the only node in the list
+    if (this.head.value === target && this.tail.value === target) {
+      this.head.next = n;
+      this.tail = n;
+    }
+    else if (this.tail.value === target) {
+      this.tail.next = n;
+      this.tail = n;
+    }
+    else {
+      let curr = this.head;
+
+      while (curr.next) {
+        if (curr.value === target) {
+          n.next = curr.next;
+          curr.next = n;
+        }
+        curr = curr.next;
+      }
+    }
+  }
+
+  addBefore(value, target) {
+
+    if (this.isEmpty()) {return false;}
+    
+    let n = new Node(value);
+    // target node is the only node in the list
+    if (this.head.value === target && this.tail.value === target) {
+      n.next = this.head;
+      this.head = n;
+    }
+    else {
+      let curr = this.head;
+
+      while (curr.next) {
+        if (curr.next === target) {
+          n.next = curr.next;
+          curr.next = n;
+        }
+        curr = curr.next;
+      }
+    }
   }
 
   contains(value) {
@@ -57,9 +114,29 @@ class SinglyLinkedList {
     return true;
   }
 
+  toArray() {
+
+  }
+
+  toReverseArray() {
+
+  }
+
+  removeLast() {
+
+  }
+
+  removeFirst() {
+
+  }
+
+  clear() {
+
+  }
+
   remove(value) {
     
-    if (!this.head) { return false; } // list is empty
+    if (this.isEmpty()) { return false; } // list is empty
     let n = this.head;
 
     if (n.value === value) {
@@ -108,9 +185,9 @@ class SinglyLinkedList {
     console.log(arr);
   }
 
-  printObject() {
-    console.log(util.inspect(this, {depth: this.length}));
-  }
+//   printObject() {
+//     console.log(util.inspect(this, {depth: this.length}));
+//   }
 }
 
 export = SinglyLinkedList;
