@@ -1,6 +1,6 @@
 'use strict';
 
-import Node = require('./singly-linked-list-node.js');
+import Node = require('./singly-linked-list-node');
 import util = require('util');
 import { isEmptyBindingElement } from 'typescript';
 import { cursorTo } from 'readline';
@@ -85,19 +85,20 @@ class SinglyLinkedList {
     
     let n = new Node(value);
     // target node is the only node in the list
-    if (this.head.value === target && this.tail.value === target) {
+    if (this.head.value === target) {
       n.next = this.head;
       this.head = n;
     }
     else {
       let curr = this.head;
-
+      let pre = this.head.next;
       while (curr.next) {
-        if (curr.next === target) {
+        if (pre.value === target) {
           n.next = curr.next;
           curr.next = n;
         }
-        curr = curr.next;
+        curr = pre;
+        pre = pre.next;
       }
     }
   }
@@ -115,23 +116,53 @@ class SinglyLinkedList {
   }
 
   toArray() {
+    let n = this.head;
+    let arr = [];
 
+    while (n) {
+      arr.push(n.value);
+      n = n.next;
+    }
+    return arr;
   }
 
   toReverseArray() {
-
+    return this.toArray().reverse();
   }
 
   removeLast() {
+    if (this.isEmpty()) { return false; } // list is empty
 
+    if  (this.head === this.tail) { // node to remove is the only node in the list
+      this.head = null;
+      this.tail = null;
+    } else {
+
+      let curr = this.head;
+      while (curr.next !== this.tail) {
+        curr = curr.next;
+      }
+      curr.next = null;
+      this.tail = curr;
+    }
   }
 
   removeFirst() {
+    if (this.isEmpty()) { return false; } // list is empty
 
+    if  (this.head === this.tail) { // node to remove is the only node in the list
+      this.head = null;
+      this.tail = null;
+    } 
+    
+    else {
+      this.head = this.head.next;
+    }
   }
 
   clear() {
-
+    this.head = null;
+    this.tail = null;
   }
 
   remove(value) {
@@ -147,7 +178,6 @@ class SinglyLinkedList {
       } else {
         this.head = this.head.next; // remove the head node
       }
-      return true;
     }
     
     while (n.next && n.next.value !== value) {
@@ -160,7 +190,6 @@ class SinglyLinkedList {
       this.tail = n;
       }
       n.next = n.next.next; // remove node between head and tail
-      return true;
     }
     return false; // no node with that value in this list
   }
@@ -175,14 +204,8 @@ class SinglyLinkedList {
   }
 
   printArray() {
-    let n = this.head;
-    let arr = [];
-
-    while (n) {
-      arr.push(n.value);
-      n = n.next;
-    }
-    console.log(arr);
+    
+    console.log(this.toArray());
   }
 
 //   printObject() {
