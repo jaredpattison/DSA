@@ -9,6 +9,10 @@ Data Structures and Algorithms
 - These DSA classes are my TypeScript implementations of pseudocode found in [Data Structures and Algorithms: Annotated Referene with Examples - First Edition](http://www.freetechbooks.com/dotnetslackers-p1936.html)  
 Granville Barnett and Luca Del Tongo 2008  
 - Challenges folder contains JavaScript Code Challenges from Code Fellows 301 complete with jest tests
+  - Challenge 1: string, array, forEach
+  - Challenge 2: string, array, obj
+  - Challenge 3: sort
+  - Challenge 4: regex
 
 [![Build Status](https://travis-ci.com/jaredpattison/dsa.svg?branch=master)](https://travis-ci.com/jaredpattison/dsa)
 
