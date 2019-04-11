@@ -6,8 +6,9 @@ Data Structures and Algorithms
 
 ### Links and Resources
 
-These DSA classes are my TypeScript implementations of pseudocode found in [Data Structures and Algorithms: Annotated Referene with Examples - First Edition](http://www.freetechbooks.com/dotnetslackers-p1936.html)  
-Granville Barnett and Luca Del Tongo 2008
+- These DSA classes are my TypeScript implementations of pseudocode found in [Data Structures and Algorithms: Annotated Referene with Examples - First Edition](http://www.freetechbooks.com/dotnetslackers-p1936.html)  
+Granville Barnett and Luca Del Tongo 2008  
+- Challenges folder contains JavaScript Code Challenges from Code Fellows 301 complete with jest tests
 
 [![Build Status](https://travis-ci.com/jaredpattison/dsa.svg?branch=master)](https://travis-ci.com/jaredpattison/dsa)
 
@@ -23,6 +24,7 @@ Granville Barnett and Luca Del Tongo 2008
 ### Testing
 All testing was done with Jest: 
 * [Jest docs](https://jestjs.io/docs/en/getting-started)
+* [ts-jest](https://www.npmjs.com/package/ts-jest)  
 
 Instructions for replicating the tests for this project are as follows:
 
@@ -34,11 +36,19 @@ Instructions for replicating the tests for this project are as follows:
     ```
     This will create a `package.json` file, a `package-lock.json` file.
 
-* Install Jest
+* Install ts-jest
 
     ```JavaScript
-    npm i jest
+    npm i -D jest typescript
+    npm i -D ts-jest @types/jest
     ```
+
+* Create config
+
+    ```JavaScript
+    npx ts-jest config:init
+    ```
+
 * Run jest
     ```JavaScript
     npm jest --verbose --coverage
@@ -61,4 +71,4 @@ Instructions for replicating the tests for this project are as follows:
 
 * jest: `npm i jest`
 * typescript: `npm i typescript`
-
+* ts-jest: `npm i -D jest typescript`
