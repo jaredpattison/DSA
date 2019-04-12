@@ -14,7 +14,7 @@ Granville Barnett and Luca Del Tongo 2008
 
 * [repo](https://github.com/jaredpattison/dsa)
 * [travis](https://travis-ci.com/jaredpattison/dsa)
-
+* [Singly Linked List](singlyLinkedList\README.md)
 
 --- 
 
