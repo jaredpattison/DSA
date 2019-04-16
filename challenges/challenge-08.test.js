@@ -9,8 +9,7 @@ For example, oddValues([1,2,3]) returns [1,3].
 ------------------------------------------------------------------------------------------------ */
 
 const oddValues = (arr) => {
-  let odds = arr.filter( n => n % 2 );
-  return odds;
+  return arr.filter(n => n % 2);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -25,11 +24,7 @@ For example, filterStringsWithVowels('gregor','hound','xyz') returns ['gregor', 
 
 
 const filterStringsWithVowels = (arr) => {
-  const regex = /[AEIOUaeiou]/g;
-  const res = arr.filter( str => {
-    return str.match(regex);
-  });
-  return res;
+  return arr.filter(w => (w.match(/[aeiou]/g)));
 };
 
 
@@ -42,10 +37,7 @@ For example, notInFirstArray([1,2,3], [1,2,3,4]) returns [4].
 ------------------------------------------------------------------------------------------------ */
 
 const notInFirstArray = (forbiddenValues, arr) => {
-  const res = arr.filter( element => {
-    return !(forbiddenValues.includes(element));
-  });
-  return res;
+  return arr.filter(value => !(forbiddenValues.includes(value)));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -180,13 +172,6 @@ const evenOddNumericValues = (arr) => {
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
-
-All the code below will verify that your functions are working to solve the challenges.
-
-DO NOT CHANGE any of the below code.
-
-Run your tests from the console: jest challenges-08.test.js
-
 ------------------------------------------------------------------------------------------------ */
 
 describe('Testing challenge 1', () => {
@@ -235,6 +220,7 @@ describe('Testing challenge 3', () => {
   });
 });
 
+
 describe('Testing challenge 4', () => {
   test('It should return an array containing the stats that are greater than the input', () => {
     expect(getBaseStatGreaterThan(snorlaxData.stats, 75)).toStrictEqual([ { stat: { url: 'https://pokeapi.co/api/v2/stat/5/', name: 'special-defense' }, effort: 2, baseStat: 110 } ]);
@@ -245,6 +231,7 @@ describe('Testing challenge 4', () => {
     expect(getBaseStatGreaterThan([{baseStat: 10}, {baseStat: -85}, {baseStat: 0}, {baseStat: -50}], -60)).toStrictEqual([{baseStat: 10}, {baseStat: 0}, {baseStat: -50}]);
   });
 });
+
 
 describe('Testing challenge 5', () => {
   test('It should return the name of the stats that exceed that maximum', () => {
@@ -267,12 +254,15 @@ describe('Testing challenge 5', () => {
   });
 });
 
+
 describe('Testing challenge 6', () => {
   test('It should return an array containing characters who do not have children', () => {
     expect(getCharactersWithoutChildren(characters)).toStrictEqual([ { name: 'Sansa', spouse: 'Tyrion', house: 'Stark' }, { name: 'Jon', spouse: null, house: 'Snow' } ]);
     expect(getCharactersWithoutChildren(characters).length).toStrictEqual(2);
   });
 });
+
+('Testing challenge 7', () => {
 
 describe('Testing challenge 7', () => {
   test('It should remove non-integers and return "even" or "odd', () => {
