@@ -247,7 +247,7 @@ describe('Testing challenge 5', () => {
       {baseStat: 10, stat: {name: 'one'}},
       {baseStat: -85, stat: {name: 'two'}},
       {baseStat: 0, stat: {name: 'three'}},
-      {baseStat: -50, stat: {name: 'four'}}
+      {baseStat: -50, stat: {name: 'four'}},
     ], -60)).toStrictEqual(['one', 'three', 'four']);
   });
 });
