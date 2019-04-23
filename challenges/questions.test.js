@@ -1,9 +1,7 @@
 'use strict';
 
-// Reverse a string with built in functions
-const reverseStringArray = (str) => {
-  return str.split('').reverse().join('');
-};
+// Reverse a string with built in array functions
+const reverseStringArray = (str) => str.split('').reverse().join('');
 
 // This is likely the answer they are looking for
 const reverseStringForLoop = (str) => {
@@ -15,18 +13,17 @@ const reverseStringForLoop = (str) => {
   return newString;
 };
 
+// a recursive option - Note, .slice() can be replaced with .substring() method with same parameter
 const reverseStringRecursive = (str) => {
   if (str === '') 
     return '';
 
-  return reverseStringRecursive(str.substr(1)) + str.charAt(0); 
+  return reverseStringRecursive(str.slice(1)) + str[0]; 
 };
 
 const isPal = (str) => {
-  for (let i = 0; i <= str.length/2; i++) {
-    if (str[i] !== str[str.length - 1 - i]) {
-      return false;
-    }
+  for (let i = 0; i < (str.length / 2); i++) {
+    if (str[i] !== str[str.length - 1 - i]) return false;
   }
   return true;
 };
@@ -36,7 +33,7 @@ const isPal = (str) => {
 // let strRev = '!!!ti ,revo ?lla .noitautnup: dah ,gnirts sihT';
 
 const removePunct = (str) => {
-  const regex = /[A-Za-z\d\s]/g;
+  const regex = /[\w\s]/g; 
   return str.match(regex).join('');
 };
 
@@ -56,7 +53,7 @@ describe('Reverse a string with Decrementing For Loop', () => {
   });
 });
 
-describe('Reverse a string', () => {
+describe('Reverse a string recursively', () => {
   test('it should return the string reversed', () => {
     const expected = reverseStringRecursive('!ereht olleh');
     
@@ -92,9 +89,9 @@ describe('Is palindrome', () => {
 
 describe('remove punctuation from string', () => {
   test('it returns string with no punctuation', () => {
-    const result = removePunct('?this, string has many &pu,.ncuation"s');
+    const result = removePunct('?this, string has ma8ny &pu,.ncuation"s');
 
-    const expected = 'this string has many puncuations';
+    const expected = 'this string has ma8ny puncuations';
 
     expect(result).toStrictEqual(expected);
   });
