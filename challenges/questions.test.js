@@ -37,6 +37,28 @@ const removePunct = (str) => {
   return str.match(regex).join('');
 };
 
+// Get product of all other elements -  compliments of asdFletcher
+
+// Given an array of integers, return a new array such that each element at index i of the new array is the product of all the numbers in the original array except the one at i.
+
+// For example:
+// [1, 2, 3, 4, 5] --> [120,60,40,30,24]
+// [3,2,1] --> [2,3,6]
+
+// The follow up question is, can you do this without division?
+
+const prod = (arr) => {
+  return arr.reduce((acc, val) => {
+    return acc *= val;
+  }, 1);
+};
+
+const productOfOthers = (arr) => {
+  return arr.map((val, idx) => {
+    return prod(arr.slice(0, idx)) * prod(arr.slice(idx + 1));
+  });
+};
+
 describe('Reverse a string', () => {
   test('it should return the string reversed', () => {
     const expected = reverseStringArray('!ereht olleh');
@@ -92,6 +114,16 @@ describe('remove punctuation from string', () => {
     const result = removePunct('?this, string has ma8ny &pu,.ncuation"s');
 
     const expected = 'this string has ma8ny puncuations';
+
+    expect(result).toStrictEqual(expected);
+  });
+});
+
+describe('product of others function', () => {
+  test('it returns product of array excluding corresponding value', () => {
+    const result = productOfOthers([ 1, 2, 3, 4, 5]);
+
+    const expected = [ 120, 60, 40, 30, 24];
 
     expect(result).toStrictEqual(expected);
   });
