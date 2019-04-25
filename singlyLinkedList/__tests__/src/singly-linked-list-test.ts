@@ -526,38 +526,10 @@ describe('singly linked list class', () => {
       The following tests are commented out as Jest mocks currently not working in TypeScript
      ****************************************************************************************
 */
-/* 
-  // This is an example test to replace mocks, for reference
-  class Foo {
-    addListener = (callback: () => number) => { }
-    func = () => {
-      this.addListener(() => 1);
-    }
-  }
-  
-  test('working', () => {
-    const foo = new Foo();
-    const mockAddListener = jest.spyOn(foo, 'addListener'); // spy on foo.addListener
-    mockAddListener.mockImplementation(() => { }); // replace the implementation if desired
-    foo.func(); // will call addListener with a callback
-    const callback = mockAddListener.mock.calls[0][0];
-    expect(callback()).toEqual(1); // SUCCESS
-  });
 
-  describe('print method', () => {
-
+ /*  describe('print method', () => {
     it('can print multiple elements in correct order', () => {
-  
-      const list = new SinglyLinkedList();
-      console.log = jest.spyOn(list, 'console.log');
-      mockAddlistener.mockImplementation(() => {});
-      list.func();
-      const callback = mockAddlistener.mock.calls[0][0];
-      expect(callback()).toEqual();
-
-
-
-          console.log = jest.fn();
+      console.log = jest.fn();
 
       let list = new SinglyLinkedList();
       list.addLast(8);
@@ -677,4 +649,5 @@ describe('singly linked list class', () => {
       expect(console.log.mock.calls[0][0]).toEqual(expected);
     });
   }); */
+
 });
