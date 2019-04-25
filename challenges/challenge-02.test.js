@@ -9,9 +9,8 @@ Write a function that appends ' The end.' to a string, and returns the modified 
 ------------------------------------------------------------------------------------------------ */
 
 const appendTheEnd = (str) => {
-  // Solution code here...
-  const res = str + ' The end.';
-  return res;
+  
+  return str + ' The end.';
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -28,7 +27,6 @@ console.log(a) prints [1, 2, 3, 1]
 ------------------------------------------------------------------------------------------------ */
 
 const appendFirstToLast = (arr) => {
-  // Solution code here...
   arr.push(arr[0]);
 };
 
@@ -48,7 +46,6 @@ console.log(a) prints { fullName: 'Octavia Estelle Butler', yearBorn: 1947 }
 ------------------------------------------------------------------------------------------------ */
 
 const addBirthYearProperty = (obj, year) => {
-  // Solution code here...
   obj.yearBorn = year;
 };
 
@@ -66,10 +63,7 @@ console.log(people[1].isAuthor) prints true
 ------------------------------------------------------------------------------------------------ */
 
 const setStatusAsAuthor = (people) => {
-  // Solution code here...
-  people.forEach(person => {
-    person.isAuthor = true;
-  });
+  people.forEach(person => person = person.isAuthor = true);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -88,20 +82,11 @@ console.log(a) prints [1, 2, 3, 4]
 ------------------------------------------------------------------------------------------------ */
 
 const append = (arr1, arr2) => {
-  // Solution code here...
-  arr2.forEach(num => {
-    arr1.push(num);
-  });
+  Array.prototype.push.apply(arr1, arr2);
 };
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
-
-All the code below will verify that your functions are working to solve the challenges.
-
-DO NOT CHANGE any of the below code.
-
-Run your tests from the console: jest challenges-02.test.js
 
 ------------------------------------------------------------------------------------------------ */
 
