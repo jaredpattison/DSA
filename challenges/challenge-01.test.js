@@ -9,12 +9,12 @@ Then, write a function named speaker that takes in a string and a callback funct
 ------------------------------------------------------------------------------------------------ */
 
 const greeting = (word) => {
-  // Solution code here...
+  
   return word.toUpperCase();
 };
 
 const speaker = (message, callback) => {
-  // Solution code here...
+  
   return callback(message);
 };
 
@@ -35,16 +35,14 @@ Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
 const addValues = (arr, value) => {
-  // Solution code here...
   arr.push(value);
 };
 
 const addNumbers = (num, arr, times, callback) => {
-  // Solution code here...
   for (let i = 0; i < times; i++) {
     callback(arr, num);
   }
-  return arr;
+  return arr;  
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -60,17 +58,11 @@ Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
 const removeOne = (num, arr) => {
-  // Solution code here...
-  if (num % 3 === 2) {
-    arr.pop();
-  }
+  if (num % 3 === 2) arr.pop();  
 };
 
 const removeElements = (arr, callback) => {
-  // Solution code here...
-  for (let i = 0; i < arr.length; i++) {
-    callback(arr[i], arr);
-  }
+  for (let i = 0; i < arr.length; i++) callback(arr[i], arr);
   return arr;
 };
 
@@ -81,10 +73,7 @@ Write a function named removeWithForEach that produces the same output as challe
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithForEach = (arr, callback) => {
-  // Solution code here...
-  arr.forEach(element => {
-    callback(element, arr);
-  });
+  arr.forEach((val) => callback(val, arr));
   return arr;
 };
 
@@ -99,11 +88,8 @@ This anonymous function should accept up to three arguments: the element, the in
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithAnon = (arr) => {
-  // Solution code here...
-  arr.forEach(element => {
-    if (element % 3 === 2) {
-      arr.pop();
-    }
+  arr.forEach((val) => {
+    if (val % 3 === 2) arr.pop();
   });
   return arr;
 };
@@ -126,14 +112,11 @@ This function should use forEach to populate your grocery list based on the stor
 ------------------------------------------------------------------------------------------------ */
 
 const createList = (availableItems) => {
-  // Solution code here...
-  let list = [];
-  availableItems.forEach(item => {
-    if (item.available === true) {
-      list.push(item.name);
-    }
+  const res = [];
+  availableItems.forEach((item) => {
+    if (item.available === true) res.push(item.name);
   });
-  return list;
+  return res;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -151,34 +134,18 @@ Return the resulting output array.
 ------------------------------------------------------------------------------------------------ */
 
 const fizzbuzz = (arr) => {
-  // Solution code here...
-  let results = [];
+  const res = [];
   arr.forEach(num => {
-    if (num % 3 === 0 && num % 5 === 0) {
-      results.push('Fizz Buzz');
-    }
-    else if (num % 3 === 0) {
-      results.push('Fizz');
-    }
-    else if (num % 5 === 0) {
-      results.push('Buzz');
-    }
-    else {
-      results.push(num);
-    }
+    if (!(num % 5) && !(num % 3)) res.push('Fizz Buzz');
+    else if (!(num % 5)) res.push('Buzz');
+    else if (!(num % 3)) res.push('Fizz');
+    else res.push(num);
   });
-  return results;
+  return res;
 };
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
-
-All the code below will verify that your functions are working to solve the challenges.
-
-DO NOT CHANGE any of the below code.
-
-Run your tests from the console: jest challenges-01.test.js
-
 ------------------------------------------------------------------------------------------------ */
 
 describe('Testing challenge 1', () => {
