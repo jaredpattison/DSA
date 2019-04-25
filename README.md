@@ -13,6 +13,17 @@ Granville Barnett and Luca Del Tongo 2008
   - Challenge 2: string, array, obj
   - Challenge 3: sort
   - Challenge 4: regex
+  - Challenge 5: slice, splice, split, regex
+  - Challenge 6: forEach, objects
+  - Challenge 7: loops, map
+  - Challenge 8: filter
+  - Challenge 9: reduce
+  - Challenge 10: reduce, map
+  - Challenge 11: regex
+  - Challenge 12: 2D arrays
+  - Challenge 13: map, filter, reduce, regex
+  - Challenge 14: reduce, objects, 2D arrays
+  - Questions: random interview javaScript question and tests
 
 [![Build Status](https://travis-ci.com/jaredpattison/dsa.svg?branch=master)](https://travis-ci.com/jaredpattison/dsa)
 
@@ -23,6 +34,7 @@ Granville Barnett and Luca Del Tongo 2008
 --- 
 
 ---
+
 
 
 ### Testing
