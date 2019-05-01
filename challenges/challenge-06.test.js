@@ -31,45 +31,45 @@ let characters = [
     name: 'Eddard',
     spouse: 'Catelyn',
     children: ['Robb', 'Sansa', 'Arya', 'Bran', 'Rickon'],
-    house: 'Stark',
+    house: 'Stark'
   },
   {
     name: 'Jon A.',
     spouse: 'Lysa',
     children: ['Robin'],
-    house: 'Arryn',
+    house: 'Arryn'
   },
   {
     name: 'Cersei',
     spouse: 'Robert',
     children: ['Joffrey', 'Myrcella', 'Tommen'],
-    house: 'Lannister',
+    house: 'Lannister'
   },
   {
     name: 'Daenarys',
     spouse: 'Khal Drogo',
     children: ['Drogon', 'Rhaegal', 'Viserion'],
-    house: 'Targaryen',
+    house: 'Targaryen'
   },
   {
     name: 'Mace',
     spouse: 'Alerie',
     children: ['Margaery', 'Loras'],
-    house: 'Tyrell',
+    house: 'Tyrell'
   },
   {
     name: 'Sansa',
     spouse: 'Tyrion',
     children: [],
-    house: 'Stark',
+    house: 'Stark'
   },
   {
     name: 'Jon S.',
     spouse: null,
     children: [],
-    house: 'Snow',
-  },
-];
+    house: 'Snow'
+  }
+]
 
 const totalCharacters = (arr) => {
   return arr.length;
@@ -83,8 +83,8 @@ Write a function named getHouses that returns a new array containing the names o
 
 const getHouses = (arr) => {
   let houses = [];
-  arr.forEach(character => {
-    houses.push(character.house);
+  arr.forEach(char => {
+    houses.push(char.house);
   });
   return houses;
 };
@@ -102,12 +102,11 @@ hasChildrenValues(characters, 'Eddard') will return false
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenValues = (arr, character) => {
-  let res = false;
-
-  arr.forEach( person => {
-    if (Object.values(person)[0] === character && Object.values(person)[2].length > 0) res = true;
+  let flag = false;
+  arr.forEach(char => {
+    if (char.name === character && Object.values(char.children).length > 0) flag = true;
   });
-  return res;
+  return flag;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -119,12 +118,13 @@ The input and output of this function are the same as the input and output from 
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenEntries = (arr, character) => {
-  let res = false;
-
-  arr.forEach( person => {
-    if (Object.entries(person)[0][1] === character && Object.entries(person)[2][1].length > 0) res = true;
+  let flag = false;
+  arr.forEach(char => {
+    if (char.name === character) {
+      if (Object.entries(char.children)[0]) flag = true; 
+    }
   });
-  return res;
+  return flag;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -139,11 +139,10 @@ For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ..
 
 const houseSize = (arr) => {
   const sizes = [];
-  arr.forEach( obj => {
-    let num = 1;
-    if (obj.spouse) num += 1;
-    num += obj.children.length;
-    sizes.push({ house: obj.house, members: num});
+  arr.forEach(char => {
+    let count = char.children.length + 1;
+    if (char.spouse) count ++;
+    sizes.push({ house: char.house, members: count });
   });
   return sizes;
 };
@@ -168,11 +167,10 @@ const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 
 const houseSurvivors = (arr) => {
   const survivors = [];
-  arr.forEach( obj => {
-    let num = 1;
-    if (obj.spouse && !(deceasedSpouses.includes(obj.spouse))) num += 1;
-    num += obj.children.length;
-    survivors.push({ house: obj.house, members: num});
+  arr.forEach(char => {
+    let num = char.children.length + 1;
+    if (char.spouse && !(deceasedSpouses.includes(char.spouse))) num++;
+    survivors.push({ house: char.house, members: num });
   });
   return survivors;
 };
