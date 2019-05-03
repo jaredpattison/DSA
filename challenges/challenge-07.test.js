@@ -69,17 +69,6 @@ const evenOdd = (arr) => {
     return 'even';
   });
 };
-// const evenOdd = (arr) => {
-//   const str = (int) => {
-//     if (typeof int !== 'number') {return 'N/A';}
-//     if (int % 2 === 0) {return 'even';}
-//     else {return 'odd';}
-//   };
-//   const res = arr.map(value => {
-//     return str(value);
-//   });
-//   return res;
-// };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
