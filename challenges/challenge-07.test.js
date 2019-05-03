@@ -11,12 +11,9 @@ For example, twoToThe([1,2,3]) returns [2,4,8] because 2 ^ 1 = 2, 2 ^ 2 = 4, and
 ------------------------------------------------------------------------------------------------ */
 
 const forLoopTwoToThe = (arr) => {
-  const res = [];
-
-  for (let value of arr) {
-    res.push(Math.pow(2, value));
-  }
-  return res;
+  let res = [];
+  for(let i of arr) res.push(Math.pow(2,i));
+  return res; 
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -26,10 +23,8 @@ Write a function named forEachTwoToThe that produces the same output as your for
 ------------------------------------------------------------------------------------------------ */
 
 const forEachTwoToThe = (arr) => {
-  const res = [];
-  arr.forEach( value => {
-    res.push(Math.pow(2, value));
-  });
+  let res = [];
+  arr.forEach(i => res.push(Math.pow(2, i)));
   return res;
 };
 
@@ -40,10 +35,7 @@ Write a function named mapTwoToThe that produces the same output as your forLoop
 ------------------------------------------------------------------------------------------------ */
 
 const mapTwoToThe = (arr) => {
-  const res = arr.map(function(value){
-    return Math.pow(2, value);
-  });
-  return res;
+  return arr.map(i => Math.pow(2, i));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -57,10 +49,7 @@ For example: charCode(['h','i']) returns [104, 105].
 ------------------------------------------------------------------------------------------------ */
 
 const charCode = (arr) => {
-  const res = arr.map(value => {
-    return value.charCodeAt([0]);
-  });
-  return res;
+  return arr.map(char => char.charCodeAt());
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -74,15 +63,11 @@ For example: evenOdd([1,2,3]) returns ['odd','even','odd'].
 ------------------------------------------------------------------------------------------------ */
 
 const evenOdd = (arr) => {
-  const str = (int) => {
-    if (typeof int !== 'number') {return 'N/A';}
-    if (int % 2 === 0) {return 'even';}
-    else {return 'odd';}
-  };
-  const res = arr.map(value => {
-    return str(value);
+  return arr.map(int => {
+    if (typeof int !== 'number') return 'N/A';
+    if (int % 2) return 'odd';
+    return 'even';
   });
-  return res;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -128,10 +113,7 @@ const snorlaxAbilities = {
 };
 
 const extractAbilities = (arr) => {
-  const res = arr.map(function(value) {
-    return value.ability.name;
-  });
-  return res;
+  return arr.map(obj => obj.ability.name);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -178,14 +160,20 @@ const snorlaxStats = {
 };
 
 const extractStats = (arr) => {
-  const res = arr.map(function(value) {
-    return { name: value.stat.name, total: value.effort + value.baseStat };
+  return arr.map(obj => {
+    return { name: obj.stat.name, total: obj.effort + obj.baseStat };
   });
-  return res;
 };
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
+
+All the code below will verify that your functions are working to solve the challenges.
+
+DO NOT CHANGE any of the below code.
+
+Run your tests from the console: jest challenges-07.test.js
+
 ------------------------------------------------------------------------------------------------ */
 
 describe('Testing challenge 1', () => {
