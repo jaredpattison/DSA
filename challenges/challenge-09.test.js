@@ -8,7 +8,12 @@ Write a function named countNumberOfElements that, given an array as input, uses
 Note: You may not use the array's built-in length property.
 ------------------------------------------------------------------------------------------------ */
 
-const countNumberOfElements = (arr) => arr.reduce( (acc) => ++acc, 0);
+const countNumberOfElements = (arr) => {
+  return arr.reduce((acc) => {
+    acc++;
+    return acc;
+  }, 0);
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -63,14 +68,14 @@ let starWarsData = [{
   skin_color: 'light',
   eye_color: 'brown',
   birth_year: '19BBY',
-  gender: 'female',
-}];
+  gender: 'female'
+}]
 
 const returnNames = (arr) => {
-  return arr.reduce( function(acc, value, idx) {
-    acc[idx] = value.name;
+  return arr.reduce((acc, person) => {
+    acc.push(person.name);
     return acc;
-  }, [] );
+  }, []);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -82,11 +87,8 @@ Note: You must use reduce for this challenge. You may not use the built-in .reve
 ------------------------------------------------------------------------------------------------ */
 
 const reversedString = (str) => {
-  let rev = str.split('').reduce( function( acc, value) {
-    acc.unshift(value);
-    return acc;
-  }, [] ); 
-  return rev.join('');
+  if(str === '') return str;
+  return reversedString(str.slice(1)) + str[0];
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -139,13 +141,10 @@ const characters = [
 ];
 
 const countNumberOfChildren = (arr) => {
-  let children = arr.reduce ( (acc, value) => {
-    if (value.children) {
-      acc += value.children.length;
-    }
+  return arr.reduce((acc, val) => {
+    if(val.children) acc += val.children.length;
     return acc;
   }, 0);
-  return children;  
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -157,12 +156,12 @@ Hint: The accumulator should begin as { count: 0, sum: 0 }
 ------------------------------------------------------------------------------------------------ */
 
 const calculateAverage = (arr) => {
-  const average = arr.reduce( (acc, val, idx) => {
-    acc.sum += val;
+  const counter = arr.reduce((acc, val) => {
     acc.count++;
+    acc.sum += val;
     return acc;
-  }, { count: 0, sum: 0 } );
-  return average.sum / average.count;
+  }, { count: 0, sum: 0 });
+  return counter.sum / counter.count;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -183,8 +182,8 @@ const isPrime = (value) => {
 };
 
 const countPrimeNumbers = (arr) => {
-  return arr.reduce ((acc, val) => {
-    if (isPrime(val)) acc++;
+  return arr.reduce((acc, val) => {
+    if(isPrime(val)) acc++;
     return acc;
   }, 0);
 };
@@ -229,10 +228,10 @@ const snorlaxData = {
 };
 
 const extractStat = (statName, arr) => {
-  return arr.reduce( (acc, val) => {
-    if (val.stat.name === statName) acc = val;
+  return arr.reduce((acc, val) => {
+    if(val.stat.name === statName) acc = val;
     return acc;
-  }, {} );
+  }, {});
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -246,19 +245,21 @@ Write a function named extractChildren that, given the array of characters from 
 ------------------------------------------------------------------------------------------------ */
 
 const extractChildren = (arr) => {
-  let aCharacters = arr.filter( people => people.name.match(/[aA]/g));
-  return aCharacters.reduce( (acc, val) => {
-    if (val.children !== undefined) {
-      val.children.forEach(kid => {
-        acc.push(kid);
-      });
-    }
+  const aPeople = arr.filter(val => val.name.match(/a/i));
+  return aPeople.reduce((acc, val) => {
+    if(val.children) acc = acc.concat(val.children);
     return acc;
   }, []);
 };
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
+
+All the code below will verify that your functions are working to solve the challenges.
+
+DO NOT CHANGE any of the below code.
+
+Run your tests from the console: jest challenges-09.test.js
 ------------------------------------------------------------------------------------------------ */
 
 describe('Testing challenge 1', () => {

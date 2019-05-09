@@ -9,7 +9,7 @@ For example, oddValues([1,2,3]) returns [1,3].
 ------------------------------------------------------------------------------------------------ */
 
 const oddValues = (arr) => {
-  return arr.filter(n => n % 2);
+  return arr.filter(val => (val % 2));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -24,9 +24,13 @@ For example, filterStringsWithVowels('gregor','hound','xyz') returns ['gregor', 
 
 
 const filterStringsWithVowels = (arr) => {
-  return arr.filter(w => (w.match(/[aeiou]/g)));
+  const regex = /[aeiou]/i;
+  return arr.filter(str => regex.test(str));
 };
 
+// const filterStringsWithVowels = (arr) => {
+//   return arr.filter(w => (w.match(/[aeiou]/g)));
+// };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -37,7 +41,7 @@ For example, notInFirstArray([1,2,3], [1,2,3,4]) returns [4].
 ------------------------------------------------------------------------------------------------ */
 
 const notInFirstArray = (forbiddenValues, arr) => {
-  return arr.filter(value => !(forbiddenValues.includes(value)));
+  return arr.filter(val => !forbiddenValues.includes(val));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -80,8 +84,7 @@ const snorlaxData = {
 };
 
 const getBaseStatGreaterThan = (arr, minBaseStat) => {
-  const res = arr.filter ( obj => obj.baseStat > minBaseStat);
-  return res;
+  return arr.filter(obj => obj.baseStat > minBaseStat);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -93,9 +96,8 @@ For example, getStatName(snorlaxData.stats, 50) will return ['special-defense', 
 ------------------------------------------------------------------------------------------------ */
 
 const getStatName = (arr, minBaseStat) => {
-  const res = arr.filter ( obj => obj.baseStat > minBaseStat);
-  const names = res.map (obj => obj.stat.name);
-  return names;
+  const objs = arr.filter(obj => obj.baseStat > minBaseStat);
+  return objs.map(obj => obj.stat.name);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -148,8 +150,7 @@ const characters = [
 ];
 
 const getCharactersWithoutChildren = (arr) => {
-  const res = arr.filter(obj => !(obj.children));
-  return res;
+  return arr.filter(char => !char.children);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -161,17 +162,22 @@ For example: evenOddNumericValues(['Gregor', 2, 4, 1]) returns ['even', 'even', 
 ------------------------------------------------------------------------------------------------ */
 
 const evenOddNumericValues = (arr) => {
-  const str = (int) => {
-    if (int % 2 === 0) {return 'even';}
-    else {return 'odd';}
-  };
-  const filtered = arr.filter(entry => typeof entry === 'number');
-  const mapped = filtered.map(number => str(number));
-  return mapped;
+  const nums = arr.filter(val => typeof val === 'number');
+  return nums.map(int => {
+    if(int % 2) return 'odd';
+    return 'even';
+  });
 };
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
+
+All the code below will verify that your functions are working to solve the challenges.
+
+DO NOT CHANGE any of the below code.
+
+Run your tests from the console: jest challenges-08.test.js
+
 ------------------------------------------------------------------------------------------------ */
 
 describe('Testing challenge 1', () => {
@@ -193,7 +199,7 @@ describe('Testing challenge 2', () => {
 
   test('It should not contain any words that do not contain vowels', () => {
     expect(filterStringsWithVowels(['gregor','hound','xyz'])).not.toContain('xyz');
-  });
+  })
 });
 
 describe('Testing challenge 3', () => {
@@ -247,7 +253,7 @@ describe('Testing challenge 5', () => {
       {baseStat: 10, stat: {name: 'one'}},
       {baseStat: -85, stat: {name: 'two'}},
       {baseStat: 0, stat: {name: 'three'}},
-      {baseStat: -50, stat: {name: 'four'}},
+      {baseStat: -50, stat: {name: 'four'}}
     ], -60)).toStrictEqual(['one', 'three', 'four']);
   });
 });
