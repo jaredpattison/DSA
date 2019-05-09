@@ -11,28 +11,16 @@ Note: You might need to use the same method more than once.
 For example, count(5, [[1, 3, 5, 7, 9], [5, 5, 5], [1, 2, 3]]) returns 4.
 ------------------------------------------------------------------------------------------------ */
 
-// const count = (target, input) => {
-//   let output = input.reduce( (total, arr) => {
-
-//     total += arr.reduce( (count, value) => {
-//       if (value === target) {count++;}
-//       return count;
-//     }, 0);
-//     return total;
-    
-//   }, 0);
-//   return output;
-// };
-
 const count = (target, input) => {
-  const flat = input.reduce( (acc, val) => {
+  const flat = input.reduce((acc, val) => {
     return acc.concat(val);
-  },[] );
-  return flat.reduce( (acc, val) => {
-    if (val === target) {acc++;}
+  }, []);
+  return flat.reduce((acc, val) => {
+    if (val === target) acc++;
     return acc;
   }, 0);
 };
+
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
 
@@ -46,10 +34,10 @@ For example, [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]] returns 66.
 const totalSum = (input) => {
   const flat = input.reduce((acc, val) => {
     return acc.concat(val);
-  }, [] );
+  }, []);
   return flat.reduce((acc, val) => {
     acc += val;
-    return acc;   
+    return acc;
   }, 0);
 };
 
@@ -67,10 +55,10 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 
 const divisibleByFiveTwoToThePower = (input) => {
   const filtered = input.map(arr => {
-    return arr.filter(n => !(n % 5) && typeof n === 'number');
+    return arr.filter(val => !(val % 5) && typeof val === 'number');
   });
   return filtered.map(arr => {
-    return arr.map(n => Math.pow(2, n)); 
+    return arr.map(int => Math.pow(2, int));
   });
 };
 
@@ -137,10 +125,8 @@ let starWarsData = [{
 }]
 
 let findMaleAndFemale = (data) => {
-  const res = data.reduce((acc, obj) => {
-    if(obj.gender === 'male' || obj.gender === 'female') {
-      acc.push(obj.name);
-    }
+  const res = data.reduce((acc, val) => {
+    if (val.gender === 'male' || val.gender === 'female') acc.push(val.name);
     return acc;
   }, []);
   return res.join(' and ');
@@ -152,25 +138,22 @@ CHALLENGE 5
 Write a function named findShortest that, given the Star Wars data from Challenge 6, uses any combination of filter, map and reduce to return the name of the shortest character.
 ------------------------------------------------------------------------------------------------ */
 
-// let findShortest = (data) => {
-//   const shortest = data.reduce( (acc, obj) => {
-//     if (parseInt(obj.height) < acc.height) {
-//       acc = { name: obj.name, height: parseInt(obj.height)};
-//     }
-//     return acc;
-//   }, { name: '', height: Number.MAX_SAFE_INTEGER });
-//   return shortest.name;
-// };
 let findShortest = (data) => {
-  return data.reduce( (shortest, curr) => {
-    if (parseInt(shortest.height) > parseInt(curr.height)) {
-      shortest = curr;
-    }
+  return data.reduce((shortest, curr) => {
+    if (parseInt(shortest.height) > parseInt(curr.height)) shortest = curr;
     return shortest;
   }).name;
-}; 
+};
+
 /* ------------------------------------------------------------------------------------------------
 TESTS
+
+All the code below will verify that your functions are working to solve the challenges.
+
+DO NOT CHANGE any of the below code.
+
+Run your tests from the console: jest challenges-10.test.js
+
 ------------------------------------------------------------------------------------------------ */
 
 describe('Testing challenge 1', () => {
