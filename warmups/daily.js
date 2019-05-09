@@ -1,5 +1,3 @@
-'use strict';
-
 let numbers = [1,2,3,4,5,6,7,8,9,10];
 
 // ---------------------------------------------------- //
@@ -8,30 +6,30 @@ const forLoop = (arr) => {
   for (let i of arr) console.log(i);
 };
 
-function whileLoop(arr) {
-  let tempArr = [...arr];
-  while (tempArr.length) console.log(tempArr.shift());
-}
+const whileLoop = (arr) => {
+  let temp = [...arr];
+  while (temp.length) console.log(temp.shift());
+};
 
-const map = (arr,cb) => {
+const map = (arr, cb) => {
   let res = [];
-  for(let val of arr) res.push(cb(val));
+  for (let val of arr) res.push(cb(val));
   return res;
 };
 
-function filter(arr, cb) {
+const filter = (arr, cb) => {
   let res = [];
-  for(let val of arr) {
-    if(cb(val)) res.push(val);
+  for (let val of arr) {
+    if (cb(val)) res.push(val);
   }
   return res;
-}
+};
 
-const reduce = (arr, cb, res) => {
-  for(let val of arr) {
-    res = cb(res, val);
+const reduce = (arr, cb, acc) => {
+  for (let i = 0; i < arr.length; i++) {
+    acc = cb(acc, arr[i], i);
   }
-  return res;
+  return acc;
 };
 
 // ---------------------------------------------------- //
@@ -78,7 +76,7 @@ const stuff = {
 const state = {people, stuff};
 let newPeople = ['Odie', ...people, 'Garfield'];
 const newStuff = {...stuff, cars: [...stuff.cars, 'Mazda']};
-let newState = {...state, people: ['Odie', ...people, 'Garfield'], stuff: {...stuff, cars: [...stuff.cars, 'Mazda']}};
+let newState = {...state, people: ['Odie', ...people, 'Garfield'], stuff, cars: [...stuff.cars, 'Mazda']};
 
 // ---------------------------------------------------- //
 

@@ -1,11 +1,4 @@
 let numbers = [1,2,3,4,5,6,7,8,9,10];
-const people = ['Kookla','Fran','Ollie'];
-const stuff = {
-  tv: 'huge',
-  radio: 'old',
-  toothbrush: 'frayed',
-  cars: ['Toyota','Mazda'],
-};
 
 // ---------------------------------------------------- //
 
@@ -40,6 +33,15 @@ let sum = reduce(numbers, (acc,num) => {
 console.log({sum});
 console.log('------------------\n\n');
 
+// ---------------------------------------------------- //
+
+const people = ['Kookla','Fran','Ollie'];
+const stuff = {
+  tv: 'huge',
+  radio: 'old',
+  toothbrush: 'frayed',
+  cars: ['Toyota','Mazda'],
+};
 
 // ---------------------------------------------------- //
 
