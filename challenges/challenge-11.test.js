@@ -31,9 +31,9 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 ------------------------------------------------------------------------------------------------ */
 
 const validateEmail = (email) => {
-  const validEmail = /^[A-Za-z\d]+\.*[A-Za-z\d]+@[A-Za-z\d]+\.((net)|(org)|(com))$/;
+  const regex = /^\w+\.?\w+@\w+\.(net|com|org)$/i;
 
-  return validEmail.test(email);
+  return regex.test(email);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -58,9 +58,9 @@ Return either true or false.
 ------------------------------------------------------------------------------------------------ */
 
 const validatePhoneNumber = (phoneNumber) => {
-  const validPhoneNumber = /^((\(\d{3}\))|\d{3})\s?(-|\))?\s?\d{3}(\s|-)?\d{4}$/;
+  const regex = /^((\(\d{3}\)|\d{3}))(\s|-)?\d{3}(\s|-)?\d{4}$/i;
 
-  return validPhoneNumber.test(phoneNumber);
+  return regex.test(phoneNumber);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -73,14 +73,20 @@ findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>'])
 ------------------------------------------------------------------------------------------------ */
 
 const findTagNames = elements => {
-  const tag = /(?<=<)\/\w+(?=>)/g;
+  const regex = /(?<=<)\/\w*(?=>)/g;
 
-  return elements.reduce( (acc, str) => 
-    acc.concat(str.match(tag)), []);
-};    
+  return elements.reduce((acc, str) => 
+    acc.concat(str.match(regex)), []);
+};
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
+
+All the code below will verify that your functions are working to solve the challenges.
+
+DO NOT CHANGE any of the below code.
+
+Run your tests from the console: jest solutions-11.test.js
 ------------------------------------------------------------------------------------------------ */
 
 describe('Testing challenge 1', () => {
