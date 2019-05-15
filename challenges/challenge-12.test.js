@@ -23,13 +23,13 @@ const alkiBeach = [33, 31, 147, 130, 27, 93, 38, 126, 141, 63, 46, 17];
 const cookieStores = [firstPike, seaTac, seattleCenter, capHill, alkiBeach];
 
 const grandTotal = (stores) => {
-  const res = new Array(hoursOpen.length).fill(0);
-  stores.forEach(store => {
-    for (let j = 0; j < store.length; j++) {
-      res[j] += store[j];
-    }
+  const totalHourlySalesArr = new Array(hoursOpen.length).fill(0);
+  stores.forEach(storesHourlySalesArr => {
+    storesHourlySalesArr.forEach((sales, idx) => {
+      totalHourlySalesArr[idx] += sales;
+    });
   });
-  return res;
+  return totalHourlySalesArr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -43,12 +43,9 @@ Write a function named salesData that uses forEach to iterate over the hourlySal
 ------------------------------------------------------------------------------------------------ */
 
 const salesData = (hours, data) => {
-  const res = [];
-
-  data.forEach( (hour, i) => {
-    res.push({ sales: `${hour} cookies`, time:  hours[i] });
+  return data.map((hourlyTotalSales, idx) => {
+    return { sales: `${hourlyTotalSales} cookies`, time: hours[idx]};
   });
-  return res;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -70,15 +67,12 @@ const errands = [
 ]
 
 const howManyTreats = (arr) => {
-  const treats = arr.reduce((acc, val, idx) => {
-    val.items.forEach(item => {
-      if (item.name === 'Treats') {
-        acc += item.quantity;
-      }
+  return arr.reduce((totalTreats, listObj) => {
+    listObj.items.forEach(storeListObj => {
+      if (storeListObj.name === 'Treats') totalTreats += storeListObj.quantity;
     });
-    return acc;
+    return totalTreats;
   }, 0);
-  return treats;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -100,9 +94,18 @@ The top row of the board is considered row zero and row numbers increase as they
 ------------------------------------------------------------------------------------------------ */
 
 const battleship = (board, row, col) => {
-  if(board[row][col] === '#') return 'hit'; 
-  return 'miss';
-};
+  switch (board[row][col]) {
+  case '#':
+    return 'hit';
+  case ' ':
+    return 'miss';
+  }
+}
+
+// const battleship = (board, row, col) => {
+//   if(board[row][col] === '#') return 'hit'; 
+//   return 'miss';
+// };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -141,10 +144,9 @@ const averageDailyTemperature = (weather) => {
   const flat = weather.reduce((acc, val) => {
     return acc.concat(val);
   }, []);
-  const sum = flat.reduce((acc, val) => {
-    return acc += val;
-  }, 0);
-  return sum / flat.length;
+  return flat.reduce((acc, val) => {
+    return acc + val;
+  }, 0) / flat.length;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -165,18 +167,15 @@ let lowestWeeklyTemperatureData = [
 ];
 
 const lowestWeeklyAverage = (weather) => {
-  const sums = weather.map(week => {
-    return week.reduce((acc, val) => {
+  const weeklySums = weather.map(weeklyArr => {
+    return weeklyArr.reduce((acc, val) => {
       return acc += val;
-    }, 0);
+    });
   });
-  const low = sums.reduce((low, curr) => {
-    if (curr < low) {
-      low = curr;
-    }
-    return low;
-  });
-  return low / 7;
+  return weeklySums.reduce((acc, val) => {
+    if (val < acc) acc = val;
+    return acc;
+  }) / 7;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -192,14 +191,21 @@ For example, excel('1,1,1\n4,4,4\n9,9,9') returns [3, 12, 27].
 ------------------------------------------------------------------------------------------------ */
 
 const excel = (str) => {
-  const row = str.split('\n');
-  return row.map((arr) => {
-    return arr.split(',').reduce( (acc, val) => parseInt(acc) + parseInt(val), 0);
+  const rows = str.split('\n');
+  return rows.map(arr => {
+    return arr.split(',').reduce((acc, val) => parseInt(acc) + parseInt(val));
   });
 };
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
+
+All the code below will verify that your functions are working to solve the challenges.
+
+DO NOT CHANGE any of the below code.
+
+Run your tests from the console: jest challenge-12.test.js
+
 ------------------------------------------------------------------------------------------------ */
 
 
