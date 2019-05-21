@@ -9,9 +9,7 @@ For example, ['this is great :)', 'wow', 'whyyyyyy :(', ':)))))'] returns ['t', 
 ------------------------------------------------------------------------------------------------ */
 
 const firstLetters = (arr) => {
-  return arr.map(str => {
-    return str[0];
-  });
+  return arr.map(str => str[0]);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -34,8 +32,8 @@ For example, (123) 456-7890 returns 1234567890
 
 const standardizePhoneNumbers = (arr) => {
   const regex = /\d/g;
-  return arr.map(num => {
-    return num.match(regex).join('');
+  return arr.map(number => {
+    return number.match(regex).join('');
   });
 };
 
@@ -49,11 +47,6 @@ For example, 'abcdefg' returns 'bdf'
 
 const onlyOddChars = (str) => {
   return str.split('').filter((char, idx) => idx % 2).join('');
-/*   let res = '';
-  for (let idx in str) {
-    if (idx % 2) res += str[idx];
-  }
-  return res; */
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -76,8 +69,8 @@ Write a function named findAnything that takes in an array of strings, along wit
 ------------------------------------------------------------------------------------------------ */
 
 const findAnything = (arr, target) => {
-  return arr.reduce((acc, str) => {
-    if (str.includes(target)) acc.push(str); 
+  return arr.reduce((acc, val) => {
+    if (val.includes(target)) acc.push(val);
     return acc;
   }, []);
 };
@@ -89,10 +82,10 @@ Write a function named findEvery that takes in an array of strings, along with a
 ------------------------------------------------------------------------------------------------ */
 
 const findEvery = (arr, target) => {
-  for (let str of arr) {
-    if (!str.includes(target)) return false;
-  }
-  return true;
+  return arr.reduce((acc, val) => {
+    if (!val.includes(target)) acc = false;
+    return acc;
+  }, true);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -108,9 +101,9 @@ For example, [['Brook Testing', 'Actual Person'], ['Human Person', 'Brook again'
 ------------------------------------------------------------------------------------------------ */
 
 const unenrollBrook = (arr) => {
-  return arr.map (course => {
-    return course.reduce((acc, str) => {
-      if (!str.includes('Brook')) acc.push(str);
+  return arr.map(courseRoster => {
+    return courseRoster.reduce((acc, val) => {
+      if (!val.includes('Brook')) acc.push(val);
       return acc;
     }, []);
   });
@@ -164,6 +157,13 @@ const characterByIndex = (arr) => {
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
+
+All the code below will verify that your functions are working to solve the challenges.
+
+DO NOT CHANGE any of the below code.
+
+Run your tests from the console: jest challenges-13.test.js
+
 ------------------------------------------------------------------------------------------------ */
 
 describe('Testing challenge 1', () => {
