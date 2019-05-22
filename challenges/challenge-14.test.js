@@ -86,8 +86,10 @@ let starWarsData = [{
 }]
 
 let biggerThanLuke = (arr) => {
-  return arr.reduce((acc, obj, idx) => {
-    if (parseInt(obj.mass) > 77) acc.push(obj.name);
+  return arr.reduce((acc, obj) => {
+    if (parseInt(obj.mass) > 77) {
+      acc.push(obj.name);
+    }
     return acc;
   }, []).join(' - ');
 };
@@ -107,9 +109,9 @@ This data could be could be sorted by name or price.
 ------------------------------------------------------------------------------------------------ */
 
 const sortBy = (property, arr) => {
-  return arr.sort((a, b) => {
-    if (a[property] < b[property]) return -1;
+  return arr.sort((a,b) => {
     if (a[property] > b[property]) return 1;
+    if (a[property] < b[property]) return -1;
     return 0;
   });
 };
@@ -127,8 +129,7 @@ https://secure.com returns true because the URL is secure
 https:/missingslash.org returns false because the URL is malformed
 ------------------------------------------------------------------------------------------------ */
 const isSecure = (url) => {
-  const regex = /^(https:\/\/)/;
-
+  const regex = /^https:\/\//;
   return regex.test(url);
 };
 
@@ -152,12 +153,10 @@ Here is a sample board:
 ------------------------------------------------------------------------------------------------ */
 
 const detectTicTacToeWin = (board) => {
-  let diagonal1 = [];// \
-  let diagonal2 = [];// /
+  let diagonalOne = [];
+  let diagonalTwo = [];
 
   for (let i = 0; i < board.length; i++) {
-    
-    // horizontal and vertical 
     let horizontal = [];
     let vertical = [];
 
@@ -167,22 +166,26 @@ const detectTicTacToeWin = (board) => {
     }
     if (helpCheck(horizontal) || helpCheck(vertical)) return true;
 
-    diagonal1.push(board[i][i]);
-    diagonal2.push(board[i][2 - i]);
+    diagonalOne.push(board[i][i]);
+    diagonalTwo.push(board[i][2 - i]);
   }
-  if (helpCheck(diagonal1) || helpCheck(diagonal2)) return true;
+  if (helpCheck(diagonalOne) || helpCheck(diagonalTwo)) return true;
   return false;
 };
 
 const helpCheck = (line) => {
-  if (line[0] !== '' && line[0] === line[1] && line[0] === line[2]) {
-    return true;
-  }
+  if (line[0] !== '' && line[0] === line[1] && line[0] === line[2]) return true;
   return false;
 };
-
 /* ------------------------------------------------------------------------------------------------
 TESTS
+
+All the code below will verify that your functions are working to solve the challenges.
+
+DO NOT CHANGE any of the below code.
+
+Run your tests from the console: jest challenge-14.test.js
+
 ------------------------------------------------------------------------------------------------ */
 
 describe('Testing challenge 1', () => {
