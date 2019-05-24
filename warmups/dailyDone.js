@@ -1,3 +1,7 @@
+'use strict';
+
+const util = require('util');
+
 let numbers = [1,2,3,4,5,6,7,8,9,10];
 
 // ---------------------------------------------------- //
@@ -75,8 +79,8 @@ const stuff = {
 
 const state = {people, stuff};
 let newPeople = ['Odie', ...people, 'Garfield'];
-const newStuff = {...stuff, cars: [...stuff.cars, 'Mazda']};
-let newState = {...state, people: ['Odie', ...people, 'Garfield'], stuff, cars: [...stuff.cars, 'Mazda']};
+const newStuff = {...stuff, cars: [...stuff.cars, 'Ford']};
+let newState = {...state, people: ['Odie', ...people, 'Garfield'], stuff: {...stuff, cars: [...stuff.cars, 'Ford']}};
 
 // ---------------------------------------------------- //
 
@@ -92,8 +96,8 @@ console.log('------------------\n\n');
 console.log({newStuff});
 console.log('------------------\n\n');
 
-console.log({state});
+console.log(util.inspect(state, 2));
 console.log('------------------\n\n');
 
-console.log({newState});
+console.log(util.inspect(newState, 2));
 console.log('------------------\n\n');

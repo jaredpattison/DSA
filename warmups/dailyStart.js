@@ -1,3 +1,7 @@
+'use strict';
+
+const util = require('util');
+
 let numbers = [1,2,3,4,5,6,7,8,9,10];
 
 // ---------------------------------------------------- //
@@ -61,8 +65,8 @@ console.log('------------------\n\n');
 console.log({newStuff});
 console.log('------------------\n\n');
 
-console.log({state});
+console.log(util.inspect(state, 2));
 console.log('------------------\n\n');
 
-console.log({newState});
+console.log(util.inspect(newState, 2));
 console.log('------------------\n\n');
