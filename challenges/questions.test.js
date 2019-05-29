@@ -59,6 +59,37 @@ const productOfOthers = (arr) => {
   });
 };
 
+// Given a list of numbers and a number k, return whether any two numbers from the list add up to k.
+// For example, given [10, 15, 3, 7] and k of 17, return true since 10 + 7 is 17.
+// Bonus: Can you do this in one pass?
+
+const sumNum = (arr, k) => {
+  for (let i = 0; i < arr.length - 1; i++) {
+    for (let j = (i + 1); j < arr.length; j++) {
+      if ((arr[i] + arr[j]) === k) {return true;}
+    }
+  }
+  return false;
+};
+
+describe('sumNum', () => {
+
+  test('it should return true when given array with two numbers that add up to k', () => {
+    const array = [10, 15, 3, 7];
+    const k = 17;
+
+    expect(sumNum(array, k)).toBeTruthy();
+  });
+
+  test('it should return false when given an array where no two numbers add up to k', () => {
+    const array = [10, 15, 3, 7];
+    const k = 11;
+
+    expect(sumNum(array, k)).toBeFalsy;
+  });
+
+});
+
 describe('Reverse a string', () => {
   test('it should return the string reversed', () => {
     const expected = reverseStringArray('!ereht olleh');
