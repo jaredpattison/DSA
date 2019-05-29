@@ -42,7 +42,7 @@ const addNumbers = (num, arr, times, callback) => {
   for (let i = 0; i < times; i++) {
     callback(arr, num);
   }
-  return arr;  
+  return arr;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -58,11 +58,13 @@ Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
 const removeOne = (num, arr) => {
-  if (num % 3 === 2) arr.pop();  
+  if (num % 3 === 2) arr.pop();
 };
 
 const removeElements = (arr, callback) => {
-  for (let i = 0; i < arr.length; i++) callback(arr[i], arr);
+  for (let i of arr) {
+    callback(i, arr);
+  }
   return arr;
 };
 
@@ -73,7 +75,9 @@ Write a function named removeWithForEach that produces the same output as challe
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithForEach = (arr, callback) => {
-  arr.forEach((val) => callback(val, arr));
+  arr.forEach(num => {
+    callback(num, arr);    
+  });
   return arr;
 };
 
@@ -88,8 +92,8 @@ This anonymous function should accept up to three arguments: the element, the in
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithAnon = (arr) => {
-  arr.forEach((val) => {
-    if (val % 3 === 2) arr.pop();
+  arr.forEach( num => {
+    if (num % 3 === 2) arr.pop();
   });
   return arr;
 };
@@ -112,11 +116,12 @@ This function should use forEach to populate your grocery list based on the stor
 ------------------------------------------------------------------------------------------------ */
 
 const createList = (availableItems) => {
-  const res = [];
+  const list = [];
+
   availableItems.forEach((item) => {
-    if (item.available === true) res.push(item.name);
+    if(item.available) list.push(item.name);
   });
-  return res;
+  return list;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -135,10 +140,10 @@ Return the resulting output array.
 
 const fizzbuzz = (arr) => {
   const res = [];
-  arr.forEach(num => {
-    if (!(num % 5) && !(num % 3)) res.push('Fizz Buzz');
-    else if (!(num % 5)) res.push('Buzz');
+  arr.forEach((num) => {
+    if (!(num % 3) && !(num % 5)) res.push('Fizz Buzz');
     else if (!(num % 3)) res.push('Fizz');
+    else if (!(num % 5)) res.push('Buzz');
     else res.push(num);
   });
   return res;
@@ -146,6 +151,13 @@ const fizzbuzz = (arr) => {
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
+
+All the code below will verify that your functions are working to solve the challenges.
+
+DO NOT CHANGE any of the below code.
+
+Run your tests from the console: jest challenges-01.test.js
+
 ------------------------------------------------------------------------------------------------ */
 
 describe('Testing challenge 1', () => {
