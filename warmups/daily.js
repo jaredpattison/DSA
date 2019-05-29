@@ -1,37 +1,40 @@
+'use strict';
+
+const util = require('util');
+
 let numbers = [1,2,3,4,5,6,7,8,9,10];
 
 // ---------------------------------------------------- //
 
 const forLoop = (arr) => {
-  for (let val of arr) console.log(val);
+  for (let i of arr) console.log(i);
 };
 
 const whileLoop = (arr) => {
-  let newArr = [...arr];
-  while (newArr.length) console.log(newArr.shift());
+  let temp = [...arr];
+  while (temp.length) console.log(temp.shift());
 };
 
 const map = (arr, cb) => {
   let res = [];
-  for (let val of arr) res.push(cb(val));
+  for (let i of arr) res.push(cb(i));
   return res;
 };
 
 const filter = (arr, cb) => {
   let res = [];
-  for (let val of arr) {
-    if (cb(val)) res.push(val);
+  for (let i of arr) {
+    if (cb(i)) res.push(i);
   }
   return res;
 };
 
 const reduce = (arr, cb, acc) => {
   for (let i = 0; i < arr.length; i++) {
-    acc = (cb(acc, arr[i], i));
+    acc = cb(acc, arr[i], i);
   }
   return acc;
 };
-
 // ---------------------------------------------------- //
 
 console.log('forLoop()');
@@ -75,8 +78,8 @@ const stuff = {
 
 const state = {people, stuff};
 let newPeople = ['Odie', ...people, 'Garfield'];
-const newStuff = {...stuff, cars: [...stuff.cars, 'Mazda']};
-let newState = {...state, people: ['Odie', ...people, 'Garfield'], stuff, cars: [...stuff.cars, 'Mazda']};
+const newStuff = {...stuff, cars: [...stuff.cars, 'Ford']};
+let newState = {...state, people: ['Odie', ...people, 'Garfield'], stuff: { ...stuff, cars: [...stuff.cars, 'Ford']}};
 
 // ---------------------------------------------------- //
 
@@ -92,8 +95,8 @@ console.log('------------------\n\n');
 console.log({newStuff});
 console.log('------------------\n\n');
 
-console.log({state});
+console.log(util.inspect(state, 2));
 console.log('------------------\n\n');
 
-console.log({newState});
+console.log(util.inspect(newState, 2));
 console.log('------------------\n\n');
