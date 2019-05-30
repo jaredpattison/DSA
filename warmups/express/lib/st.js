@@ -1,4 +1,4 @@
-'use strict';
+/* 'use strict';
 
 const {server} = require('../src/server.js');
 const supertest = require('supertest');
@@ -73,4 +73,4 @@ describe('web server', () => {
 
   });
 
-});
+}); */
