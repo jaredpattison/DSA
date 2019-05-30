@@ -35,7 +35,6 @@ app.use((err,req,res,next) => {
 });
 
 module.exports = {
-  express: express,
   server: app,
   start: () => {
     const PORT = process.env.port || 3000;
