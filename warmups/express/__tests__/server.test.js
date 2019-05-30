@@ -1,10 +1,10 @@
-'use strict';
+/* 'use strict';
 
 const {server} = require('../src/server.js');
 const supertest = require('supertest');
 const mockRequest = supertest(server);
 
-xdescribe('web server', () => {
+describe('web server', () => {
 
   it('should respond with a 500 on a route that throws an error', () => {
 
@@ -73,4 +73,4 @@ xdescribe('web server', () => {
 
   });
 
-});
+}); */
