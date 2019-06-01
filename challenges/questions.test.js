@@ -72,20 +72,39 @@ const sumNum = (arr, k) => {
   return false;
 };
 
-describe('sumNum', () => {
+// From cracking the coding interview:
+// Implement an algorithm to determine if a string has all unique characters.
+// What if you cannot use aditional data structures?
 
-  test('it should return true when given array with two numbers that add up to k', () => {
-    const array = [10, 15, 3, 7];
-    const k = 17;
+const isEachUnique = (str) => {
 
-    expect(sumNum(array, k)).toBeTruthy();
+  if (str.length > 256) return false;
+
+  const dict = {};
+
+  for (let i of str) {
+    if (dict[i]) return false;
+    dict[i] = true;
+  }
+
+  return true;
+};
+
+
+
+describe('Does a string have all unique characters', () => {
+
+  test('it should return false if a character is repeated', () => {
+    const str = 'abcded';
+
+    expect(isEachUnique(str)).toBeFalsy();
   });
 
-  test('it should return false when given an array where no two numbers add up to k', () => {
-    const array = [10, 15, 3, 7];
-    const k = 11;
+  
+  test('it should return true if each character is unique', () => {
+    const str = 'abcdef';
 
-    expect(sumNum(array, k)).toBeFalsy;
+    expect(isEachUnique(str)).toBeTruthy();
   });
 
 });
@@ -159,3 +178,22 @@ describe('product of others function', () => {
     expect(result).toStrictEqual(expected);
   });
 });
+
+describe('sumNum', () => {
+
+  test('it should return true when given array with two numbers that add up to k', () => {
+    const array = [10, 15, 3, 7];
+    const k = 17;
+
+    expect(sumNum(array, k)).toBeTruthy();
+  });
+
+  test('it should return false when given an array where no two numbers add up to k', () => {
+    const array = [10, 15, 3, 7];
+    const k = 11;
+
+    expect(sumNum(array, k)).toBeFalsy;
+  });
+
+});
+
