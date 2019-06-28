@@ -21,6 +21,49 @@ const reverseStringRecursive = (str) => {
   return reverseStringRecursive(str.slice(1)) + str[0]; 
 };
 
+// reverse letters in a string without changing the position of any special characters
+
+const reverseLetters = (str) => {
+
+  let strArr = str.split('');
+  let i = 0;
+  let j = str.length - 1;
+
+  while (i < j) {
+    if (isLetter(strArr[i]) && isLetter(strArr[j])) {
+      let temp = strArr[i];
+      strArr[i] = strArr[j];
+      strArr[j] = temp;
+      i++, j--;
+    }
+    else if (isLetter(strArr[i])) {
+      j--;
+    }
+    else if (isLetter(strArr[j])) {
+      i++;
+    }
+    else {
+      i++, j--;
+    }
+  }
+  return strArr.join('');
+};
+
+const isLetter = (char) => {
+
+  const letters = 'AZaz';
+  const upperStart = letters.charCodeAt(0);
+  const upperEnd = letters.charCodeAt(1);
+  const lowerStart = letters.charCodeAt(2);
+  const lowerEnd = letters.charCodeAt(3);
+  const charCode = char.charCodeAt(0);
+
+  if (charCode >= upperStart && charCode <= upperEnd || charCode >= lowerStart && charCode <= lowerEnd) {
+    return true;
+  }
+  return false;
+};
+
 const isPal = (str) => {
   for (let i = 0; i < (str.length / 2); i++) {
     if (str[i] !== str[str.length - 1 - i]) return false;
@@ -90,7 +133,15 @@ const isEachUnique = (str) => {
   return true;
 };
 
+describe('Reverse all letters in a string, leave unique characters unchanged', () => {
 
+  test('return expected results', () => {
+    const str = 'a_bc,!de,&^fg% %h';
+    const expected = 'h_gf,!ed,&^cb% %a';
+    expect(reverseLetters(str)).toStrictEqual(expected);
+  });
+
+});
 
 describe('Does a string have all unique characters', () => {
 

@@ -1,9 +1,9 @@
 'use strict';
 
 import Node = require('./singly-linked-list-node');
-import util = require('util');
-import { isEmptyBindingElement } from 'typescript';
-import { cursorTo } from 'readline';
+// import util = require('util');
+// import { isEmptyBindingElement } from 'typescript';
+// import { cursorTo } from 'readline';
 
 // Node based implementation of a linked list where every node has only a reference to the next node
 // Maintaining head and tail pointers make insertion at either head or tail a constant time operation
