@@ -7,7 +7,8 @@ Write a function named sortBackwards that takes in an array of numbers and retur
 ------------------------------------------------------------------------------------------------ */
 
 const sortBackwards = (arr) => {
-  return arr.sort( (a, b) => b - a);
+  
+  return arr.sort( (a,b) => b - a);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -31,7 +32,7 @@ Write a function named sortByLength that takes in an array of strings and return
 ------------------------------------------------------------------------------------------------ */
 
 const sortByLength = (arr) => {
-  return arr.sort( (a, b) => a.length - b.length);
+  return arr.sort( (a,b) => a.length - b.length);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -41,22 +42,7 @@ Write a function named alphabetizeBetter that takes in an array of strings and r
 
 For example, ['Alphabet', 'alphabet', 'carrot', 'Zebra'] is correctly sorted, and so is ['alphabet', 'Alphabet', 'carrot', 'Zebra'].
 ------------------------------------------------------------------------------------------------ */
-// With localeCompare():
-// const alphabetizeBetter = (arr) => {
-//   return arr.sort( (a, b) => a.localeCompare(b));
-// }
-// This works too:
-// const alphabetizeBetter = (arr) => {
-//   return arr.sort( (a, b) => {    
-//     let strA = a.toUpperCase();
-//     let strB = b.toUpperCase();
-    
-//     if (strA < strB) return -1;
-//     if (strB < strA) return 1;
-//     else return 0;
-//   });
-// };
-// A more consise version of above:
+
 const alphabetizeBetter = (arr) => {
   return arr.sort( (a, b) => a.toUpperCase() > b.toUpperCase());
 };
@@ -75,7 +61,7 @@ Here is an example of the input:
 ------------------------------------------------------------------------------------------------ */
 
 const sortByPrice = (arr) => {
-  return arr.sort( (a, b) => a.price - b.price);
+  return arr.sort( (a,b) => a.price - b.price);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -87,7 +73,7 @@ For example, [1, 14, 0.2, -281, 54782] is only correctly sorted in that order.
 ------------------------------------------------------------------------------------------------ */
 
 const sortNumbersByLength = (arr) => {
-  return arr.sort( (a, b) => a.toString().length - b.toString().length);
+  return arr.sort( (a,b) => a.toString().length - b.toString().length);
 };
 
 /*-----------------------------------------------------------------------------------------------
@@ -109,7 +95,7 @@ const people = [
 ];
 
 const sortPeople = (arr) => {
-  return arr.sort( (a, b) => a.lastName > b.lastName);
+  return arr.sort( (a,b) => a.lastName > b.lastName);
 };
 
 /* ------------------------------------------------------------------------------------------------
