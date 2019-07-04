@@ -13,9 +13,8 @@ For example:
 ------------------------------------------------------------------------------------------------ */
 
 const isNum = (input) => {
-  const regex = /\d/g;
 
-  return regex.test(input);
+  return (/\d/g).test(input);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -27,7 +26,6 @@ Return an array containing all the matches.
 ------------------------------------------------------------------------------------------------ */
 
 const isCapitalized = (str) => {
-  // const regex = /\b[[:upper:]]\w*/g;
   const regex = /\b[A-Z]\w*/g;
 
   return str.match(regex);
@@ -58,8 +56,8 @@ Do not use the vertical bar (pipe) in your pattern.
 ------------------------------------------------------------------------------------------------ */
 
 const matchMonth = (input) => {
-  const regex = /^[Oo]ct(ober)?\b/;
-  
+  const regex = /^[Oo]ct(ober)?$/;
+
   return regex.test(input);
 };
 
@@ -92,7 +90,7 @@ For example, 'Welcome to Code 301!' will return 'W_lc_m_ t_ C_d_ 301!'.
 ------------------------------------------------------------------------------------------------ */
 
 let hangman = (str) => {
-  const regex = /[aeiou]/g;
+  const regex = /[aeiou]/ig;
 
   return str.replace(regex, '_');
 };
@@ -110,7 +108,7 @@ Hint: All of these words end with the letters "ells".
 const seashells = 'She sells seashells by the seashore. The shells she sells are surely seashells. So if she sells shells on the seashore, I\'m sure she sells seashore shells.';
 
 const findShells = (str) => {
-  const regex = /\bsh?(eash)?(ells)\b/g;
+  const regex = /\bs\w*(ells)/ig;
 
   return str.match(regex);
 };
