@@ -12,7 +12,6 @@ Your function should use slice within a loop and return an array of each success
 For example, if the input is 'Welcome', the output will be:
 ['Welcome', 'elcome', 'lcome', 'come', 'ome', 'me', 'e', ''].
 ------------------------------------------------------------------------------------------------ */
-
 const howMuchPencil = (str) => {
   let result = [];
   // for (let i = 0; i <= str.length; i++) result.push(str.slice[i])
@@ -29,8 +28,8 @@ Write a function name wordsToCharList that, given a string as input, returns a n
 For example, wordsToCharList('gregor') returns ['g','r','e','g','o','r'].
 ------------------------------------------------------------------------------------------------ */
 
-const wordsToCharList = (str) => {
-  return str.split('');
+const wordsToCharList = (arr) => {
+  return arr.split('');
 };
 
 
@@ -77,6 +76,7 @@ const gruffaloCrumble = {
 
 const listFoods = (recipe) => {
   let result = [];
+  
   for (let ingredient of recipe.ingredients) {
     result.push(ingredient.slice(ingredient.indexOf(' ', 3) + 1));
   }
@@ -93,6 +93,7 @@ You may also use other string or array methods.
 
 const splitFoods = (recipe) => {
   let result = [];
+  
   for (let ingredient of recipe.ingredients) {
     result.push(ingredient.split(' ').slice(2).join(' '));
   }
@@ -111,9 +112,12 @@ Return a new array containing just the verbs. For example, ['Mix until evenly di
 
 const stepActions = (recipe) => {
   let result = [];
+  
   for (let action of recipe.steps) {
     result.push(action.split(' ')[0]);
   }
+  
+
   return result;
 };
 
@@ -131,9 +135,11 @@ For example:
 ------------------------------------------------------------------------------------------------ */
 
 const removeEvenValues = (arr) => {
+  
   for (let i = arr.length - 1; i >= 0; i--) {
     if (!(arr[i] % 2)) arr.splice(i, 1);
   }
+  
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -164,6 +170,7 @@ Write a function named totalSumCSV that, given a string of comma-separated value
 
 const totalSumCSV = (str) => {
   let total = 0;
+  
   str.split(',').forEach(int => total += parseInt(int));
   return total;
 };
@@ -196,7 +203,7 @@ Similarly, extractVowels('The quick brown fox') returns ['Th qck brwn fx', 'eioo
 const extractVowels = (str) => {
   const regex = /[aeiou]/g;
 
-  return [str.replace(regex, ''), str.match(regex).sort().join('')];
+  return [ str.replace(regex, ''), str.match(regex).sort().join('')];
 };
 
 /* ------------------------------------------------------------------------------------------------
