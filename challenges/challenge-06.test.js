@@ -1,5 +1,6 @@
 'use strict';
 
+
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 1
 
@@ -12,11 +13,8 @@ const courseInfo = { name: 'Code 301', duration: { dayTrack: '4 weeks', eveningT
   finalExam: true };
 
 const getCourseKeys = (obj) => {
-  const keys = [];
-  Object.keys(obj).forEach( property => {
-    keys.push(property);
-  });
-  return keys;
+  return Object.keys(obj);
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -69,7 +67,7 @@ let characters = [
     children: [],
     house: 'Snow'
   }
-]
+];
 
 const totalCharacters = (arr) => {
   return arr.length;
@@ -83,9 +81,11 @@ Write a function named getHouses that returns a new array containing the names o
 
 const getHouses = (arr) => {
   let houses = [];
-  arr.forEach(char => {
-    houses.push(char.house);
+  
+  arr.forEach(character => {
+    houses.push(character.house);
   });
+
   return houses;
 };
 
@@ -104,8 +104,10 @@ hasChildrenValues(characters, 'Eddard') will return false
 const hasChildrenValues = (arr, character) => {
   let flag = false;
   arr.forEach(char => {
-    if (char.name === character && Object.values(char.children).length > 0) flag = true;
+
+    if (char.name === character && Object.values(char.children)[0]) flag = true;
   });
+
   return flag;
 };
 
@@ -120,10 +122,9 @@ The input and output of this function are the same as the input and output from 
 const hasChildrenEntries = (arr, character) => {
   let flag = false;
   arr.forEach(char => {
-    if (char.name === character) {
-      if (Object.entries(char.children)[0]) flag = true; 
-    }
+    if (char.name === character && Object.entries(char.children)[0]) flag = true;
   });
+
   return flag;
 };
 
@@ -168,9 +169,9 @@ const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 const houseSurvivors = (arr) => {
   const survivors = [];
   arr.forEach(char => {
-    let num = char.children.length + 1;
-    if (char.spouse && !(deceasedSpouses.includes(char.spouse))) num++;
-    survivors.push({ house: char.house, members: num });
+    let count = char.children.length + 1;
+    if (char.spouse && !deceasedSpouses.includes(char.spouse)) count ++;
+    survivors.push({ house: char.house, members: count });
   });
   return survivors;
 };
