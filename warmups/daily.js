@@ -17,14 +17,14 @@ const whileLoop = (arr) => {
 
 const map = (arr, cb) => {
   let res = [];
-  for (let i of arr) res.push(cb(i));
+  for (let val of arr) res.push(cb(val));
   return res;
 };
 
 const filter = (arr, cb) => {
   let res = [];
-  for (let i of arr) {
-    if (cb(i)) res.push(i);
+  for (let val of arr) {
+    if (cb(val)) res.push(val);
   }
   return res;
 };
@@ -35,6 +35,7 @@ const reduce = (arr, cb, acc) => {
   }
   return acc;
 };
+
 // ---------------------------------------------------- //
 
 console.log('forLoop()');
@@ -79,7 +80,7 @@ const stuff = {
 const state = {people, stuff};
 let newPeople = ['Odie', ...people, 'Garfield'];
 const newStuff = {...stuff, cars: [...stuff.cars, 'Ford']};
-let newState = {...state, people: ['Odie', ...people, 'Garfield'], stuff: { ...stuff, cars: [...stuff.cars, 'Ford']}};
+let newState = {...state, people: ['Odie', ...people, 'Garfield'], stuff: {...stuff, cars: [...stuff.cars, 'Ford']}};
 
 // ---------------------------------------------------- //
 
