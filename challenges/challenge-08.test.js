@@ -9,7 +9,7 @@ For example, oddValues([1,2,3]) returns [1,3].
 ------------------------------------------------------------------------------------------------ */
 
 const oddValues = (arr) => {
-  return arr.filter(number => number % 2);
+  return arr.filter(int => int % 2);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -24,7 +24,10 @@ For example, filterStringsWithVowels('gregor','hound','xyz') returns ['gregor', 
 
 
 const filterStringsWithVowels = (arr) => {
-  return arr.filter(str => str.match(/[aeiou]/i));
+  
+  const regex = /[aeiou]/i;
+
+  return arr.filter(word => regex.test(word));
 };
 
 
@@ -37,7 +40,10 @@ For example, notInFirstArray([1,2,3], [1,2,3,4]) returns [4].
 ------------------------------------------------------------------------------------------------ */
 
 const notInFirstArray = (forbiddenValues, arr) => {
-  return arr.filter(value => !forbiddenValues.includes(value));
+  
+  let forbiddenSet = new Set(forbiddenValues);
+  
+  return arr.filter(val => !forbiddenSet.has(val));
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -80,6 +86,7 @@ const snorlaxData = {
 };
 
 const getBaseStatGreaterThan = (arr, minBaseStat) => {
+  
   return arr.filter(obj => obj.baseStat > minBaseStat);
 };
 
@@ -92,9 +99,10 @@ For example, getStatName(snorlaxData.stats, 50) will return ['special-defense', 
 ------------------------------------------------------------------------------------------------ */
 
 const getStatName = (arr, minBaseStat) => {
-  const objects = arr.filter(obj => obj.baseStat > minBaseStat);
+  
+  const statObjects = arr.filter(obj => obj.baseStat > minBaseStat);
 
-  return objects.map(obj => obj.stat.name);
+  return statObjects.map(obj => obj.stat.name);  
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -147,7 +155,7 @@ const characters = [
 ];
 
 const getCharactersWithoutChildren = (arr) => {
-  return arr.filter(character => !character.children);
+  return arr.filter(charObj => !charObj.children);
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -159,10 +167,10 @@ For example: evenOddNumericValues(['Gregor', 2, 4, 1]) returns ['even', 'even', 
 ------------------------------------------------------------------------------------------------ */
 
 const evenOddNumericValues = (arr) => {
-  const numbers = arr.filter(value => typeof value === 'number');
+  const ints = arr.filter(val => typeof val === 'number');
 
-  return numbers.map(number => {
-    if (number % 2) return 'odd';
+  return ints.map(int => {
+    if (int % 2) return 'odd';
     return 'even';
   });
 };
