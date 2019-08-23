@@ -57,17 +57,18 @@ Output:
 ] */
 
 const subsetsWithDup = nums => {
+
   nums = nums.sort();
   return backtrack(nums);
+
 };
 
 const backtrack = (nums, res = [], idx = 0, path = []) => {
   res.push([...path]);
 
   for (let i = idx; i < nums.length; i++) {
-    if (i > idx && nums[i] === nums[i - 1]) {
-      continue;
-    }
+    
+    if (i > idx && nums[i] === nums[i - 1]) continue;
 
     path.push(nums[i]);
     backtrack(nums, res, i + 1, path);
@@ -496,8 +497,7 @@ const permuteUnique = (nums) => {
 
 };
 
-
-const backTrack = (nums, res = [], path) => {
+const backTrack = (nums, res = [], path = []) => {
 
   if(nums.length === 0){
     res.push([...path]);

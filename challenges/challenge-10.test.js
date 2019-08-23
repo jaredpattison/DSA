@@ -12,10 +12,10 @@ For example, count(5, [[1, 3, 5, 7, 9], [5, 5, 5], [1, 2, 3]]) returns 4.
 ------------------------------------------------------------------------------------------------ */
 
 const count = (target, input) => {
-  const flat = input.reduce((acc, val) => {
-    return acc.concat(val);
+  const flat = input.reduce( (acc, arr) => {
+    return acc.concat(arr);
   }, []);
-  return flat.reduce((acc, val) => {
+  return flat.reduce( (acc, val) => {
     if (val === target) acc++;
     return acc;
   }, 0);
@@ -32,12 +32,11 @@ For example, [[1, 2, 3, 4, 5], [6, 7, 2, 4, 5, 7], [9, 2, 3, 6,]] returns 66.
 ------------------------------------------------------------------------------------------------ */
 
 const totalSum = (input) => {
-  const flat = input.reduce((acc, val) => {
-    return acc.concat(val);
+  const flat = input.reduce( (acc, arr) => {
+    return acc.concat(arr);
   }, []);
-  return flat.reduce((acc, val) => {
-    acc += val;
-    return acc;
+  return flat.reduce( (acc, val) => {
+    return acc + val;
   }, 0);
 };
 
@@ -54,13 +53,22 @@ For example, [ [0,2,5,4], [2,4,10], [] ] should return [ [1, 32], [1024], [] ].
 ------------------------------------------------------------------------------------------------ */
 
 const divisibleByFiveTwoToThePower = (input) => {
-  const filtered = input.map(arr => {
-    return arr.filter(val => !(val % 5) && typeof val === 'number');
-  });
-  return filtered.map(arr => {
-    return arr.map(int => Math.pow(2, int));
+  return input.map( array => {
+    return array.reduce( (acc,val) => {
+      if (typeof val === 'number' && !(val % 5)) acc.push(Math.pow(2, val));
+      return acc;
+    }, []);
   });
 };
+
+// const divisibleByFiveTwoToThePower = (input) => {
+//   const filtered = input.map(arr => {
+//     return arr.filter(val => !(val % 5) && typeof val === 'number');
+//   });
+//   return filtered.map(arr => {
+//     return arr.map(int => Math.pow(2, int));
+//   });
+// };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -125,11 +133,8 @@ let starWarsData = [{
 }]
 
 let findMaleAndFemale = (data) => {
-  const res = data.reduce((acc, val) => {
-    if (val.gender === 'male' || val.gender === 'female') acc.push(val.name);
-    return acc;
-  }, []);
-  return res.join(' and ');
+  const characters = data.filter( characterObj => characterObj.gender === 'male' || characterObj.gender === 'female' );
+  return characters.map( character => character.name).join(' and ');
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -139,9 +144,9 @@ Write a function named findShortest that, given the Star Wars data from Challeng
 ------------------------------------------------------------------------------------------------ */
 
 let findShortest = (data) => {
-  return data.reduce((shortest, curr) => {
-    if (parseInt(shortest.height) > parseInt(curr.height)) shortest = curr;
-    return shortest;
+  return data.reduce( (acc, characterObj) => {
+    if (parseInt(characterObj.height) < parseInt(acc.height)) acc = characterObj;
+    return acc;
   }).name;
 };
 
