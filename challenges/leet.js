@@ -62,7 +62,7 @@ const subsetsWithDup = nums => {
 };
 
 const backtrack = (nums, res = [], idx = 0, path = []) => {
-  res.push(path.slice());
+  res.push([...path]);
 
   for (let i = idx; i < nums.length; i++) {
     if (i > idx && nums[i] === nums[i - 1]) {
@@ -374,28 +374,28 @@ var intToRoman = function(num) {
   
   // declare the different roman numerals with their values
   const numerals = {
-      M:1000,
-      CM:900,
-      D:500,
-      CD:400,
-      C:100,
-      XC:90,
-      L:50,
-      XL:40,
-      X:10,
-      IX:9,
-      V:5,
-      IV:4,
-      I:1
+    M:1000,
+    CM:900,
+    D:500,
+    CD:400,
+    C:100,
+    XC:90,
+    L:50,
+    XL:40,
+    X:10,
+    IX:9,
+    V:5,
+    IV:4,
+    I:1
   }
   
   for (var key in numerals) {
-      /* loop through for as long as the number is more than or equal to the value whilst adding key to string and removing the value from the number
+    /* loop through for as long as the number is more than or equal to the value whilst adding key to string and removing the value from the number
       */
-      while (numerals[key] <= num) {
-          res += key;
-          num -= numerals[key];
-      }
+    while (numerals[key] <= num) {
+      res += key;
+      num -= numerals[key];
+    }
   }
   
   return res;
@@ -423,13 +423,13 @@ var hasPathSum = function(root, sum) {
   let res = false;
   
   const _walk = (node, val) => {
-      let tempSum = val + node.val;
-      if (!node.left && !node.right && tempSum === sum) {
-          res = true;
-          return;
-      }
-      if (node.left) _walk(node.left, tempSum);
-      if (node.right) _walk(node.right, tempSum);
+    let tempSum = val + node.val;
+    if (!node.left && !node.right && tempSum === sum) {
+      res = true;
+      return;
+    }
+    if (node.left) _walk(node.left, tempSum);
+    if (node.right) _walk(node.right, tempSum);
    
   }
   _walk(root, 0);
@@ -461,18 +461,61 @@ var generate = function(numRows) {
   triangle.push([1])
   
   for (let rowNum = 1; rowNum < numRows; rowNum++) {
-      let row = [];
-      let prevRow = triangle[rowNum - 1];
+    let row = [];
+    let prevRow = triangle[rowNum - 1];
       
-      row.push(1);
+    row.push(1);
       
-      for (let j = 1; j < rowNum; j++) {
-          row.push(prevRow[j-1] + prevRow[j]);
-      }
+    for (let j = 1; j < rowNum; j++) {
+      row.push(prevRow[j-1] + prevRow[j]);
+    }
       
-      row.push(1);
-      triangle.push(row);
+    row.push(1);
+    triangle.push(row);
   }
   
   return triangle;    
 };
+
+/* 47Given a collection of numbers that might contain duplicates, return all possible unique permutations.
+
+Example:
+
+Input: [1,1,2]
+Output:
+[
+  [1,1,2],
+  [1,2,1],
+  [2,1,1]
+] */
+
+const permuteUnique = (nums) => {
+
+  nums.sort();
+  return backTrack(nums);
+
+};
+
+
+const backTrack = (nums, res = [], path) => {
+
+  if(nums.length === 0){
+    res.push([...path]);
+  }
+
+  let prev; 
+  for(let i = 0; i < nums.length; i++){
+
+    if(prev === nums[i]) continue; //ignore the situation of nums[i-1]==nums[i]
+        
+    path.push(nums[i]);
+    prev = nums[i];
+    backTrack(nums.slice(0,i).concat(nums.slice(i+1)), res, path);
+    path.pop();
+
+  }
+  return res;
+
+};
+
+permuteUnique([1,1,2]);
