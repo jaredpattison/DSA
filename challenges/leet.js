@@ -57,17 +57,14 @@ Output:
 ] */
 
 const subsetsWithDup = nums => {
-
   nums = nums.sort();
   return backtrack(nums);
-
 };
 
 const backtrack = (nums, res = [], idx = 0, path = []) => {
   res.push([...path]);
 
   for (let i = idx; i < nums.length; i++) {
-    
     if (i > idx && nums[i] === nums[i - 1]) continue;
 
     path.push(nums[i]);
@@ -238,20 +235,20 @@ var isValidSudoku = function(board) {
   for (var i = 0; i < 9; i++) {
     for (var j = 0; j < 9; j++) {
       let cur = board[i][j];
-      if (cur !== '.') {
+      if (cur !== ".") {
         if (
-          set.has(cur + ' in row ' + i) ||
-          set.has(cur + ' in col ' + j) ||
+          set.has(cur + " in row " + i) ||
+          set.has(cur + " in col " + j) ||
           set.has(
-            cur + ' in block ' + Math.floor(i / 3) + '-' + Math.floor(j / 3)
+            cur + " in block " + Math.floor(i / 3) + "-" + Math.floor(j / 3)
           )
         ) {
           return false;
         } else {
-          set.add(cur + ' in row ' + i);
-          set.add(cur + ' in col ' + j);
+          set.add(cur + " in row " + i);
+          set.add(cur + " in col " + j);
           set.add(
-            cur + ' in block ' + Math.floor(i / 3) + '-' + Math.floor(j / 3)
+            cur + " in block " + Math.floor(i / 3) + "-" + Math.floor(j / 3)
           );
         }
       }
@@ -287,25 +284,24 @@ Input: 4
 Output: "1211" */
 
 var countAndSay = function(n) {
-  if(n==1) return '1';
-  let preS = countAndSay(n-1).split('');
+  if (n == 1) return "1";
+  let preS = countAndSay(n - 1).split("");
 
-  let result = '';
+  let result = "";
   let counter = 0;
-  for(let i = 0; i<preS.length; i++){
-    if(counter == 0 || preS[i] == preS[i-1]){
-      counter++;    
-      if(i == preS.length -1 ){
+  for (let i = 0; i < preS.length; i++) {
+    if (counter == 0 || preS[i] == preS[i - 1]) {
+      counter++;
+      if (i == preS.length - 1) {
         result = result + counter + preS[i];
       }
-    }else{
-      result = result + counter + preS[i-1];
+    } else {
+      result = result + counter + preS[i - 1];
       i--;
-      counter=0;
-    }     
+      counter = 0;
+    }
   }
   return result;
-  
 };
 
 /* 58 Given a string s consists of upper/lower-case alphabets and empty space characters ' ', return the length of last word in the string.
@@ -325,7 +321,10 @@ var lengthOfLastWord = function(s) {
   //     if (str[i] === ' ') return str.length - 1 - i;
   // }
   // return str.length;
-  return s.trim().split(' ').pop().length;
+  return s
+    .trim()
+    .split(" ")
+    .pop().length;
 };
 
 /* 12 Roman numerals are represented by seven different symbols: I, V, X, L, C, D and M.
@@ -372,33 +371,33 @@ Explanation: M = 1000, CM = 900, XC = 90 and IV = 4. */
 
 var intToRoman = function(num) {
   let res = "";
-  
+
   // declare the different roman numerals with their values
   const numerals = {
-    M:1000,
-    CM:900,
-    D:500,
-    CD:400,
-    C:100,
-    XC:90,
-    L:50,
-    XL:40,
-    X:10,
-    IX:9,
-    V:5,
-    IV:4,
-    I:1
-  }
-  
+    M: 1000,
+    CM: 900,
+    D: 500,
+    CD: 400,
+    C: 100,
+    XC: 90,
+    L: 50,
+    XL: 40,
+    X: 10,
+    IX: 9,
+    V: 5,
+    IV: 4,
+    I: 1
+  };
+
   for (var key in numerals) {
     /* loop through for as long as the number is more than or equal to the value whilst adding key to string and removing the value from the number
-      */
+     */
     while (numerals[key] <= num) {
       res += key;
       num -= numerals[key];
     }
   }
-  
+
   return res;
 };
 /* 112 Given a binary tree and a sum, determine if the tree has a root-to-leaf path such that adding up all the values along the path equals the given sum.
@@ -419,10 +418,9 @@ Given the below binary tree and sum = 22,
 return true, as there exist a root-to-leaf path 5->4->11->2 which sum is 22. */
 
 var hasPathSum = function(root, sum) {
-    
   if (!root) return false;
   let res = false;
-  
+
   const _walk = (node, val) => {
     let tempSum = val + node.val;
     if (!node.left && !node.right && tempSum === sum) {
@@ -431,11 +429,9 @@ var hasPathSum = function(root, sum) {
     }
     if (node.left) _walk(node.left, tempSum);
     if (node.right) _walk(node.right, tempSum);
-   
-  }
+  };
   _walk(root, 0);
   return res;
-  
 };
 
 /* 118 Given a non-negative integer numRows, generate the first numRows of Pascal's triangle.
@@ -454,28 +450,27 @@ Output:
 ] */
 
 var generate = function(numRows) {
-    
   let triangle = [];
-  
+
   if (numRows === 0) return triangle;
-  
-  triangle.push([1])
-  
+
+  triangle.push([1]);
+
   for (let rowNum = 1; rowNum < numRows; rowNum++) {
     let row = [];
     let prevRow = triangle[rowNum - 1];
-      
+
     row.push(1);
-      
+
     for (let j = 1; j < rowNum; j++) {
-      row.push(prevRow[j-1] + prevRow[j]);
+      row.push(prevRow[j - 1] + prevRow[j]);
     }
-      
+
     row.push(1);
     triangle.push(row);
   }
-  
-  return triangle;    
+
+  return triangle;
 };
 
 /* 47Given a collection of numbers that might contain duplicates, return all possible unique permutations.
@@ -490,32 +485,149 @@ Output:
   [2,1,1]
 ] */
 
-const permuteUnique = (nums) => {
-
+const permuteUnique = nums => {
   nums.sort();
   return backTrack(nums);
-
 };
 
 const backTrack = (nums, res = [], path = []) => {
-
-  if(nums.length === 0){
+  if (nums.length === 0) {
     res.push([...path]);
   }
 
-  let prev; 
-  for(let i = 0; i < nums.length; i++){
+  let prev;
+  for (let i = 0; i < nums.length; i++) {
+    if (prev === nums[i]) continue; //ignore the situation of nums[i-1]==nums[i]
 
-    if(prev === nums[i]) continue; //ignore the situation of nums[i-1]==nums[i]
-        
     path.push(nums[i]);
     prev = nums[i];
-    backTrack(nums.slice(0,i).concat(nums.slice(i+1)), res, path);
+    backTrack(nums.slice(0, i).concat(nums.slice(i + 1)), res, path);
     path.pop();
-
   }
   return res;
-
 };
 
-permuteUnique([1,1,2]);
+permuteUnique([1, 1, 2]);
+
+/* 21 Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
+
+Example:
+
+Input: 1->2->4, 1->3->4
+Output: 1->1->2->3->4->4 */
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} l1
+ * @param {ListNode} l2
+ * @return {ListNode}
+ */
+const mergeTwoLists = (l1, l2) => {
+  // both solutions start the same:
+  if (!l1) return l2;
+  if (!l2) return l1;
+
+  let less = l1.val < l2.val ? l1 : l2;
+  let more = l1.val < l2.val ? l2 : l1;
+
+  // following solution changes pointer:
+  /* let curr = less;
+  while (curr.next) {
+    if (more.val < curr.next.val) {
+      let temp = curr.next;
+      curr.next = more;
+      curr = more;
+      more = temp;
+    } 
+    else curr = curr.next;
+  }
+  curr.next = more; */
+
+  // or a recursive solution:
+  less.next = mergeTwoLists(less.next, more);
+  // both solutions with the same return:
+  return less;
+};
+
+/* 7 Given a 32-bit signed integer, reverse digits of an integer.
+
+Example 1:
+
+Input: 123
+Output: 321
+Example 2:
+
+Input: -123
+Output: -321
+Example 3:
+
+Input: 120
+Output: 21
+Note:
+Assume we are dealing with an environment which could only store integers within the 32-bit signed integer range: [−231,  231 − 1]. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows. */
+
+/**
+ * @param {number} x
+ * @return {number}
+ */
+const reverse = x => {
+  let rev = 0;
+  while (x != 0) {
+    // Following line commented out and replaced to stay within leetcode integer range
+    // if (rev > Number.MAX_SAFE_INTEGER / 10 || rev < - Number.MAX_SAFE_INTEGER / 10) return 0;
+    if (rev > 2 ** 31 / 10 || rev < -(2 ** 31 / 10)) return 0;
+    let pop = x % 10;
+    if (x > 0) x = Math.floor(x / 10);
+    else x = Math.ceil(x / 10);
+
+    rev = rev * 10 + pop;
+  }
+  return rev;
+};
+
+/* 52 The n-queens puzzle is the problem of placing n queens on an n×n chessboard such that no two queens attack each other.
+
+
+
+Given an integer n, return the number of distinct solutions to the n-queens puzzle.
+
+Example:
+
+Input: 4
+Output: 2
+Explanation: There are two distinct solutions to the 4-queens puzzle as shown below.
+[
+ [".Q..",  // Solution 1
+  "...Q",
+  "Q...",
+  "..Q."], */
+
+  /**
+ * @param {number} n
+ * @return {number}
+ */
+// this solution utilizes bitwise operators
+const backtrack = (board, n, idx) => {
+  if (idx === n) return 1;
+  else {
+      let mask = 0;
+      for (let i = 0; i < idx; i++) {
+          let pos = board[i];
+          mask = mask | pos | (pos << (idx - i)) | (pos >>> (idx - i));
+      }
+      let count = 0;
+      for (let i = 0; i < n; i++) {
+          if (((1 << i) & mask) === 0) {
+              board[idx] = (1 << i);
+              count += backtrack(board, n, idx + 1)
+              board[idx] = 0;
+          }
+      }
+      return count;
+  }
+}

@@ -10,7 +10,6 @@ If the PIN is four numerical digits long, return true. Otherwise, return false.
 
 const validatePin = (pin) => {
   const regex = /^\d{4}$/;
-
   return regex.test(pin);
 };
 
@@ -32,7 +31,6 @@ Note: if you ever need to validate an email using a regex in practice, the Inter
 
 const validateEmail = (email) => {
   const regex = /^\w+\.?\w+@\w+\.(net|com|org)$/i;
-
   return regex.test(email);
 };
 
@@ -42,15 +40,15 @@ CHALLENGE 3
 Write a function named validatePhoneNumber that accepts a phone number and determines if it is valid.
 
 Acceptable formats include:
-(555) 555-5555
-(555)555 5555
-555 555-5555
-555-5555555
-555-555 5555
-555-555-5555
-555 555 5555
-555555-5555
-5555555555
+ - (555) 555-5555
+ - (555)555 5555
+ - 555 555-5555
+ - 555-5555555
+ - 555-555 5555
+ - 555-555-5555
+ - 555 555 5555
+ - 555555-5555
+ - 5555555555
 
 Your function should include a single regular expression pattern that matches any of these formats.
 
@@ -58,8 +56,7 @@ Return either true or false.
 ------------------------------------------------------------------------------------------------ */
 
 const validatePhoneNumber = (phoneNumber) => {
-  const regex = /^((\(\d{3}\)|\d{3}))(\s|-)?\d{3}(\s|-)?\d{4}$/i;
-
+  const regex = /^(\(\d{3}\)|\d{3})\s?-?\d{3}\s?-?\d{4}$/;
   return regex.test(phoneNumber);
 };
 
@@ -73,10 +70,8 @@ findTagNames(['<div><h1>Hello, world!</h1></div>', '<p>Welcome to my site</p>'])
 ------------------------------------------------------------------------------------------------ */
 
 const findTagNames = elements => {
-  const regex = /(?<=<)\/\w*(?=>)/g;
-
-  return elements.reduce((acc, str) => 
-    acc.concat(str.match(regex)), []);
+  const regex = /(?<=<)\/\w+(?=>)/ig;
+  return elements.reduce( (acc, val) => acc.concat(val.match(regex)), []);
 };
 
 /* ------------------------------------------------------------------------------------------------
