@@ -6,35 +6,36 @@ let numbers = [1,2,3,4,5,6,7,8,9,10];
 
 // ---------------------------------------------------- //
 
-const forLoop = (arr) => {
+function forLoop(arr) {
   for (let i of arr) console.log(i);
-};
+}
 
-const whileLoop = (arr) => {
+function whileLoop(arr) {
   let temp = [...arr];
-  while (temp.length) console.log(temp.shift());
-};
 
-const map = (arr, cb) => {
+  while (temp.lenth) console.log(temp.shift());
+}
+
+function map(arr, cb) {
   let res = [];
   for (let val of arr) res.push(cb(val));
   return res;
-};
+}
 
-const filter = (arr, cb) => {
+function filter(arr, cb) {
   let res = [];
   for (let val of arr) {
     if (cb(val)) res.push(val);
   }
   return res;
-};
+}
 
-const reduce = (arr, cb, acc) => {
+function reduce(arr, cb, acc) {
   for (let i = 0; i < arr.length; i++) {
     acc = cb(acc, arr[i], i);
   }
   return acc;
-};
+}
 
 // ---------------------------------------------------- //
 
