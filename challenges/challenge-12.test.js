@@ -23,14 +23,17 @@ const alkiBeach = [33, 31, 147, 130, 27, 93, 38, 126, 141, 63, 46, 17];
 const cookieStores = [firstPike, seaTac, seattleCenter, capHill, alkiBeach];
 
 const grandTotal = (stores) => {
-  const totalHourlySalesArr = new Array(hoursOpen.length).fill(0);
-  stores.forEach(storesHourlySalesArr => {
-    storesHourlySalesArr.forEach((sales, idx) => {
-      totalHourlySalesArr[idx] += sales;
+
+  const res = new Array(hoursOpen.length).fill(0);
+
+  stores.forEach(store => {
+    store.forEach( (hour, idx) => {
+      res[idx] += hour;
     });
   });
-  return totalHourlySalesArr;
-};
+  return res;
+
+}
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -43,9 +46,11 @@ Write a function named salesData that uses forEach to iterate over the hourlySal
 ------------------------------------------------------------------------------------------------ */
 
 const salesData = (hours, data) => {
-  return data.map((hourlyTotalSales, idx) => {
-    return { sales: `${hourlyTotalSales} cookies`, time: hours[idx]};
+  
+  return data.map( (hourlySales, idx) => {
+    return { sales: `${hourlySales} cookies`, time: hoursOpen[idx] };
   });
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -67,13 +72,13 @@ const errands = [
 ]
 
 const howManyTreats = (arr) => {
-  return arr.reduce((totalTreats, listObj) => {
-    listObj.items.forEach(storeListObj => {
-      if (storeListObj.name === 'Treats') totalTreats += storeListObj.quantity;
-    });
-    return totalTreats;
-  }, 0);
-};
+  return arr.reduce( (acc, obj) => {
+    obj.items.forEach(item => {
+      if (item.name === 'Treats') acc += item.quantity;
+    })
+    return acc;
+  }, 0)
+}
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -94,19 +99,18 @@ The top row of the board is considered row zero and row numbers increase as they
 ------------------------------------------------------------------------------------------------ */
 
 const battleship = (board, row, col) => {
-  switch (board[row][col]) {
-  case '#':
-    return 'hit';
-  case ' ':
-    return 'miss';
-  }
+  if (board[row][col] === '#') return 'hit';
+  else return 'miss';
 }
 
 // const battleship = (board, row, col) => {
-//   if(board[row][col] === '#') return 'hit'; 
-//   return 'miss';
-// };
-
+//   switch (board[row][col]) {
+//   case '#':
+//     return 'hit';
+//   case ' ':
+//     return 'miss';
+//   }
+// }
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 
@@ -116,13 +120,14 @@ For example, the following input returns a product of 720: [[1,2], [3,4], [5,6]]
 ------------------------------------------------------------------------------------------------ */
 
 const calculateProduct = (numbers) => {
-  const flat = numbers.reduce((acc, val) => {
+  const flat = numbers.reduce( (acc, val) => {
     return acc.concat(val);
   }, []);
-  return flat.reduce((acc, val) => {
+
+  return flat.reduce( (acc, val) => {
     return acc * val;
   }, 1);
-};
+}
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -141,13 +146,13 @@ const weeklyTemperatures = [
 ];
 
 const averageDailyTemperature = (weather) => {
-  const flat = weather.reduce((acc, val) => {
+  const flat = weather.reduce( (acc, val) => {
     return acc.concat(val);
   }, []);
-  return flat.reduce((acc, val) => {
+  return flat.reduce( (acc, val) => {
     return acc + val;
   }, 0) / flat.length;
-};
+}
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7
@@ -167,12 +172,12 @@ let lowestWeeklyTemperatureData = [
 ];
 
 const lowestWeeklyAverage = (weather) => {
-  const weeklySums = weather.map(weeklyArr => {
-    return weeklyArr.reduce((acc, val) => {
+  const weeklySums = weather.map(arr => {
+    return arr.reduce( (acc, val) => {
       return acc += val;
     });
   });
-  return weeklySums.reduce((acc, val) => {
+  return weeklySums.reduce( (acc, val) => {
     if (val < acc) acc = val;
     return acc;
   }) / 7;
@@ -193,9 +198,9 @@ For example, excel('1,1,1\n4,4,4\n9,9,9') returns [3, 12, 27].
 const excel = (str) => {
   const rows = str.split('\n');
   return rows.map(arr => {
-    return arr.split(',').reduce((acc, val) => parseInt(acc) + parseInt(val));
+    return arr.split(',').reduce( (acc, val) => parseInt(acc) + parseInt(val));
   });
-};
+}
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
