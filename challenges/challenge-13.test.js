@@ -8,9 +8,7 @@ Write a function named firstLetters that takes in an array of strings and return
 For example, ['this is great :)', 'wow', 'whyyyyyy :(', ':)))))'] returns ['t', 'w', 'w', ':']
 ------------------------------------------------------------------------------------------------ */
 
-const firstLetters = (arr) => {
-  return arr.map(str => str[0]);
-};
+const firstLetters = (arr) => arr.map(str => str[0]);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -30,12 +28,7 @@ Write a function named standardizePhoneNumbers that takes in an array of phone n
 For example, (123) 456-7890 returns 1234567890
 ------------------------------------------------------------------------------------------------ */
 
-const standardizePhoneNumbers = (arr) => {
-  const regex = /\d/g;
-  return arr.map(number => {
-    return number.match(regex).join('');
-  });
-};
+const standardizePhoneNumbers = (arr) => arr.map(str => str.replace(/\D/g, ''));
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -45,9 +38,7 @@ Write a function named onlyOddChars that takes in a string and returns only the 
 For example, 'abcdefg' returns 'bdf'
 ------------------------------------------------------------------------------------------------ */
 
-const onlyOddChars = (str) => {
-  return str.split('').filter((char, idx) => idx % 2).join('');
-};
+const onlyOddChars = (str) => str.split('').filter( (char, idx) => idx % 2).join('');
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -56,6 +47,7 @@ Write a function named allHappy that takes in an array of strings and returns a 
 ------------------------------------------------------------------------------------------------ */
 
 const allHappy = (arr) => {
+  
   for (let str of arr) {
     if (!str.includes(':)')) return false;
   }
@@ -68,12 +60,14 @@ CHALLENGE 6
 Write a function named findAnything that takes in an array of strings, along with a target string. Return an array containing only those strings from the original array that contain the target string.
 ------------------------------------------------------------------------------------------------ */
 
-const findAnything = (arr, target) => {
-  return arr.reduce((acc, val) => {
-    if (val.includes(target)) acc.push(val);
-    return acc;
-  }, []);
-};
+const findAnything = (arr, target) => arr.filter( str => str.includes(target));
+
+// const findAnything = (arr, target) => {
+//   return arr.reduce( (acc, val) => {
+//     if (val.includes(target)) acc.push(val);
+//     return acc;
+//   }, []);
+// };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7
@@ -82,10 +76,10 @@ Write a function named findEvery that takes in an array of strings, along with a
 ------------------------------------------------------------------------------------------------ */
 
 const findEvery = (arr, target) => {
-  return arr.reduce((acc, val) => {
-    if (!val.includes(target)) acc = false;
-    return acc;
-  }, true);
+  for (let str of arr) {
+    if (!str.includes(target)) return false;
+  }
+  return true;
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -101,11 +95,8 @@ For example, [['Brook Testing', 'Actual Person'], ['Human Person', 'Brook again'
 ------------------------------------------------------------------------------------------------ */
 
 const unenrollBrook = (arr) => {
-  return arr.map(courseRoster => {
-    return courseRoster.reduce((acc, val) => {
-      if (!val.includes('Brook')) acc.push(val);
-      return acc;
-    }, []);
+  return arr.map(arr => {
+    return arr.filter(str => !str.includes('Brook'));
   });
 };
 
@@ -134,12 +125,18 @@ const daysOfWeek = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Sat
 
 const sortByDay = (arr) => {
   return daysOfWeek.map(day => {
-    return arr.reduce((acc, str) => {
-      if (str.includes(day)) acc.push(str);
-      return acc;
-    }, []);
+    return arr.filter(entry => entry.includes(day));
   });
 };
+
+// const sortByDay = (arr) => {
+//   return daysOfWeek.map(day => {
+//     return arr.reduce( (acc, str) => {
+//       if (str.includes(day)) acc.push(str);
+//       return acc;
+//     }, []);
+//   });
+// };
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 10 - Stretch Goal
@@ -149,11 +146,7 @@ Write a function named characterByIndex that takes in an array of strings and re
 For example, ['abcd', 'efgh', 'ijkl', 'mnop'] returns ['a', 'f', 'k', 'p']
 ------------------------------------------------------------------------------------------------ */
 
-const characterByIndex = (arr) => {
-  return arr.map((str, idx) => {
-    return str[idx];
-  });
-};
+const characterByIndex = (arr) => arr.map( (str, idx) => str[idx]);
 
 /* ------------------------------------------------------------------------------------------------
 TESTS
