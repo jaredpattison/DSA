@@ -631,3 +631,181 @@ const backtrack = (board, n, idx) => {
       return count;
   }
 }
+
+/* 24 Given a linked list, swap every two adjacent nodes and return its head.
+
+You may not modify the values in the list's nodes, only nodes itself may be changed.
+
+ 
+
+Example:
+
+Given 1->2->3->4, you should return the list as 2->1->4->3. */
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+const swapPairs = head => {
+    
+  if (!head || !head.next) return head;
+  let curr = head;
+  let prev = null;
+  head = head.next; 
+
+  while (curr && curr.next) {
+      let temp = curr.next;
+      curr.next = temp.next;
+      temp.next = curr;
+      if (prev) prev.next = temp;
+      prev = curr;
+      curr = curr.next;
+  }
+  return head;
+  
+};
+
+/* 55 Given an array of non-negative integers, you are initially positioned at the first index of the array.
+
+Each element in the array represents your maximum jump length at that position.
+
+Determine if you are able to reach the last index.
+
+Example 1:
+
+Input: [2,3,1,1,4]
+Output: true
+Explanation: Jump 1 step from index 0 to 1, then 3 steps to the last index.
+Example 2:
+
+Input: [3,2,1,0,4]
+Output: false
+Explanation: You will always arrive at index 3 no matter what. Its maximum
+             jump length is 0, which makes it impossible to reach the last index. */
+
+// Inefficient backtracking:
+/**
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+
+const canJumpFromPosition = (pos, nums) => {
+  if (pos === nums.length - 1) return true;
+  
+  let furthestJump = Math.min(pos + nums[pos], nums.length - 1);
+  for (let nextPos = ++pos; nextPos <= furthestJump; nextPos++) {
+  // startin from furthest possible position posibly more efficient:
+  //  for (let nextPos = furthestJump; nextPos > pos; nextPos--) {
+      if (canJumpFromPosition(nextPos, nums)) return true; 
+  }
+  return false;
+}
+
+const canJump = nums => {
+  return canJumpFromPosition(0, nums);
+};
+
+// starting with furthest jump, possibly more efficient:
+const canJumpFromPosition = (pos, nums) => {
+  if (pos === nums.length - 1) return true;
+  
+  let furthestJump = Math.min(pos + nums[pos], nums.length - 1);
+  for (let nextPos = furthestJump; nextPos > pos; nextPos--) {
+      if (canJumpFromPosition(nextPos, nums)) return true; 
+  }
+  return false;
+}
+
+const canJump = nums => {
+  return canJumpFromPosition(0, nums);
+};
+
+// memoization:
+let memo;
+
+const canJumpFromPosition = (pos, nums) => {
+    if (memo[pos] !== 'UNKOWN') return memo[pos] === 'GOOD' ? true : false;
+    
+    let furthestJump = Math.min(pos + nums[pos], nums.length - 1);
+    for (let nextPos = furthestJump; nextPos > pos; nextPos--) {
+        if (canJumpFromPosition(nextPos, nums)) {
+            memo[pos] = 'GOOD';    
+            return true;
+        } 
+    }
+    memo[pos] = 'BAD';
+    return false;
+}
+
+const canJump = nums => {
+
+    memo = new Array(nums.length - 1).fill('UNKOWN');
+    memo.push('GOOD');
+    return canJumpFromPosition(0, nums);
+};
+
+// bottom up:
+const canJump = (nums) => {
+  let lastPos = nums.length - 1;
+  for (let i = nums.length - 1; i >=0; i--){
+      if (i + nums[i] >= lastPos) lastPos = i;
+  }
+  return lastPos === 0;
+};
+
+// or this:
+const canJump = (nums) => {
+  let len = nums.length;
+  let max = 0;
+  for (let i = 0; i <= max; i++) {
+      max = Math.max(max, i + nums[i]);
+      if (max >= len - 1) return true;
+  }
+  return false;
+};
+
+/* 1 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+Example:
+
+Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1]. */
+
+const twoSum = (nums, target) => {
+  for (let i = 0; i < nums.length; i++) {
+      for (let j = i + 1; j < nums.length; j++) {
+          if (nums[i] + nums[j] === target) return [i, j];
+      }
+  }
+};
+// hash map
+const twoSum = (nums, target) => {
+  const map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+      map.set(nums[i], i);
+      }
+  for (let i = 0; i < nums.length; i++) {
+      let comp = target - nums[i];
+      if (map.has(comp) && map.get(comp) !== i) return [i, map.get(comp)];
+  }   
+};
+
+// check hashmap as you buils it
+const twoSum = (nums, target) => {
+  const map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+      let comp = target - nums[i];
+      if (map.has(comp) && map.get(comp) !== i) return [i, map.get(comp)];
+      map.set(nums[i], i);
+      }    
+};
