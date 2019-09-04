@@ -39,40 +39,7 @@ var searchMatrix = function(matrix, target) {
   return false;
 };
 
-/* 90 Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set).
 
-Note: The solution set must not contain duplicate subsets.
-
-Example:
-
-Input: [1,2,2]
-Output:
-[
-  [2],
-  [1],
-  [1,2,2],
-  [2,2],
-  [1,2],
-  []
-] */
-
-const subsetsWithDup = nums => {
-  nums = nums.sort();
-  return backtrack(nums);
-};
-
-const backtrack = (nums, res = [], idx = 0, path = []) => {
-  res.push([...path]);
-
-  for (let i = idx; i < nums.length; i++) {
-    if (i > idx && nums[i] === nums[i - 1]) continue;
-
-    path.push(nums[i]);
-    backtrack(nums, res, i + 1, path);
-    path.pop();
-  }
-  return res;
-};
 
 /* 79 Given a 2D board and a word, find if the word exists in the grid.
 
@@ -473,41 +440,7 @@ var generate = function(numRows) {
   return triangle;
 };
 
-/* 47Given a collection of numbers that might contain duplicates, return all possible unique permutations.
 
-Example:
-
-Input: [1,1,2]
-Output:
-[
-  [1,1,2],
-  [1,2,1],
-  [2,1,1]
-] */
-
-const permuteUnique = nums => {
-  nums.sort();
-  return backTrack(nums);
-};
-
-const backTrack = (nums, res = [], path = []) => {
-  if (nums.length === 0) {
-    res.push([...path]);
-  }
-
-  let prev;
-  for (let i = 0; i < nums.length; i++) {
-    if (prev === nums[i]) continue; //ignore the situation of nums[i-1]==nums[i]
-
-    path.push(nums[i]);
-    prev = nums[i];
-    backTrack(nums.slice(0, i).concat(nums.slice(i + 1)), res, path);
-    path.pop();
-  }
-  return res;
-};
-
-permuteUnique([1, 1, 2]);
 
 /* 21 Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.
 
@@ -809,3 +742,39 @@ const twoSum = (nums, target) => {
       map.set(nums[i], i);
       }    
 };
+
+/* 3 Given a string, find the length of the longest substring without repeating characters.
+
+Example 1:
+
+Input: "abcabcbb"
+Output: 3 
+Explanation: The answer is "abc", with the length of 3. 
+Example 2:
+
+Input: "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+Example 3:
+
+Input: "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3. 
+Note that the answer must be a substring, "pwke" is a subsequence and not a substring. */
+// optimized sliding window
+const lengthOfLongestSubstring = s => {
+
+  let n = s.length, ans = 0;
+  let dict = new Map();
+
+  for (let j = 0, i = 0; j < n; j++) {
+    if (dict.has(s[j])) {
+      i = Math.max(dict.get(s[j]) + 1, i)
+    }
+    ans = Math.max(ans, j - i + 1);
+    dict.set(s[j], j );
+  }
+  return ans;
+}
+
+lengthOfLongestSubstring('pwwkew')
