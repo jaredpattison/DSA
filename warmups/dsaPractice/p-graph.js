@@ -2,7 +2,67 @@
 
 const {Edge, Vertex, Graph} = require('./lib/graph');
 
+const bfs = (graph, startNode) => {
 
+  const queue = [];
+  const visitedNodes = new Set();
+
+  queue.push(startNode);
+  visitedNodes.add(startNode);
+
+  while (queue.length) {
+
+    const currentNode = queue.shift();
+
+    const neighbors = graph.getNeighbors(currentNode);
+
+    for (let neighbor of neighbors) {
+
+      const neighborNode = neighbor.vertex;
+
+      if (visitedNodes.has(neighborNode)) {
+        continue;
+      } else {
+        visitedNodes.add(neighborNode);
+      }
+      queue.push(neighborNode);
+    }
+  }
+  console.log(visitedNodes);
+
+  return;
+}
+
+const dfs = (graph, startNode) => {
+
+  const stack = [];
+  const visitedNodes = new Set();
+
+  stack.push(startNode);
+  visitedNodes.add(startNode);
+
+  while (stack.length) {
+
+    const currentNode = stack.pop();
+
+    const neighbors = graph.getNeighbors(currentNode);
+
+    for (let neighbor of neighbors) {
+
+      const neighborNode = neighbor.vertex;
+
+      if (visitedNodes.has(neighborNode)) {
+        continue;
+      } else {
+        visitedNodes.add(neighborNode);
+      }
+      stack.push(neighborNode);
+    }
+  }
+  console.log(visitedNodes);
+
+  return;
+}
 
 const graph = new Graph();
 

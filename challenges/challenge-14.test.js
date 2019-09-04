@@ -9,9 +9,7 @@ For example, ['apple', 'banana', 'MacGyver'] returns ['Apple', 'Banana', 'MacGyv
 ------------------------------------------------------------------------------------------------ */
 
 const toTitleCase = (arr) => {
-  return arr.map(str => {
-    return str[0].toUpperCase() + str.slice(1);
-  });
+  return arr.map( str => str[0].toUpperCase() + str.slice(1) );
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -86,13 +84,9 @@ let starWarsData = [{
 }]
 
 let biggerThanLuke = (arr) => {
-  return arr.reduce((acc, obj) => {
-    if (parseInt(obj.mass) > 77) {
-      acc.push(obj.name);
-    }
-    return acc;
-  }, []).join(' - ');
-};
+  const characters = arr.filter( character => parseInt(character.mass) > 77 );
+  return characters.map( char => char.name).join(' - ');
+}
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -109,11 +103,11 @@ This data could be could be sorted by name or price.
 ------------------------------------------------------------------------------------------------ */
 
 const sortBy = (property, arr) => {
-  return arr.sort((a,b) => {
-    if (a[property] > b[property]) return 1;
+  return arr.sort( (a,b) => {
     if (a[property] < b[property]) return -1;
+    if (a[property] > b[property]) return 1;
     return 0;
-  });
+  })
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -131,7 +125,7 @@ https:/missingslash.org returns false because the URL is malformed
 const isSecure = (url) => {
   const regex = /^https:\/\//;
   return regex.test(url);
-};
+}
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5 - Stretch Goal
@@ -153,6 +147,12 @@ Here is a sample board:
 ------------------------------------------------------------------------------------------------ */
 
 const detectTicTacToeWin = (board) => {
+
+  const helpCheck = (line) => {
+    if (line[0] !== '' && line[0] === line[1] && line[1] === line[2]) return true;
+    return false;
+  }
+
   let diagonalOne = [];
   let diagonalTwo = [];
 
@@ -160,7 +160,7 @@ const detectTicTacToeWin = (board) => {
     let horizontal = [];
     let vertical = [];
 
-    for (let j = 0; j < board[i].length; j++) {
+    for (let j = 0; j < board.length; j++) {
       horizontal.push(board[i][j]);
       vertical.push(board[j][i]);
     }
@@ -171,12 +171,9 @@ const detectTicTacToeWin = (board) => {
   }
   if (helpCheck(diagonalOne) || helpCheck(diagonalTwo)) return true;
   return false;
-};
 
-const helpCheck = (line) => {
-  if (line[0] !== '' && line[0] === line[1] && line[0] === line[2]) return true;
-  return false;
-};
+}
+
 /* ------------------------------------------------------------------------------------------------
 TESTS
 
