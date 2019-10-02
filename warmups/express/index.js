@@ -1,3 +1,3 @@
 'use strict';
 
-require('./src/server.js').start();
+require('./src/server2.js').start();

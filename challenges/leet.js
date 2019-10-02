@@ -778,3 +778,659 @@ const lengthOfLongestSubstring = s => {
 }
 
 lengthOfLongestSubstring('pwwkew')
+
+/* 45 Given an array of non-negative integers, you are initially positioned at the first index of the array.
+
+Each element in the array represents your maximum jump length at that position.
+
+Your goal is to reach the last index in the minimum number of jumps.
+
+Example:
+
+Input: [2,3,1,1,4]
+Output: 2
+Explanation: The minimum number of jumps to reach the last index is 2.
+    Jump 1 step from index 0 to 1, then 3 steps to the last index.
+Note:
+
+You can assume that you can always reach the last index. */
+// const jump = (nums) => {
+//     let goal = nums.length - 1, j = 1, i = 0;
+//     while (i < goal) {
+//         if (i + nums[i] === goal) {
+//             j = j + 1;
+//             console.log(j, i)
+//             goal = i;
+//             i = 0;
+//         } else {
+//           console.log(i, nums[i], goal);
+//           i = i + 1;
+//         }
+//     }
+//     return j;  
+// };
+// much more efficient
+const jump = (nums) => {
+  if (nums.length === 1) return 0;
+  let idx = 0, count = 0;
+  while (idx + nums[idx] < nums.length - 1) {
+    let max = 0, next = 0;
+    for (let i = 1; i <= nums[idx]; i++) {
+      let j = idx + i, step = nums[j];
+      if (step + i >= max) {
+        max = step + i;
+        next = j;
+      }
+    }
+  idx = next;
+  count++;
+  }  
+  return count + 1;
+};
+
+jump([ 2, 3, 1, 1, 4]);
+
+/* 146 Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations: get and put.
+
+get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
+put(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.
+
+The cache is initialized with a positive capacity.
+
+Follow up:
+Could you do both operations in O(1) time complexity?
+
+Example:
+
+LRUCache cache = new LRUCache( 2 );
+
+cache.put(1, 1);
+cache.put(2, 2);
+cache.get(1);       // returns 1
+cache.put(3, 3);    // evicts key 2
+cache.get(2);       // returns -1 (not found)
+cache.put(4, 4);    // evicts key 1
+cache.get(1);       // returns -1 (not found)
+cache.get(3);       // returns 3
+cache.get(4);       // returns 4 */
+
+/**
+ * @param {number} capacity
+ */
+const LRUCache = function(capacity) {
+  this.capacity = capacity;
+  this.map = new Map();
+};
+
+/** 
+* @param {number} key
+* @return {number}
+*/
+LRUCache.prototype.get = function(key) {
+  let val = this.map.get(key);
+  if (typeof val === 'undefined') return -1;
+  this.map.delete(key);
+  this.map.set(key, val);
+  return val;
+};
+
+/** 
+* @param {number} key 
+* @param {number} value
+* @return {void}
+*/
+LRUCache.prototype.put = function(key, value) {
+  this.map.delete(key);
+  this.map.set(key, value);
+  let keys = this.map.keys();
+  if (this.map.size > this.capacity) this.map.delete(keys.next().value);
+};
+
+/** 
+* Your LRUCache object will be instantiated and called as such:
+* var obj = new LRUCache(capacity)
+* var param_1 = obj.get(key)
+* obj.put(key,value)
+*/
+
+/* 130 Given a 2D board containing 'X' and 'O' (the letter O), capture all regions surrounded by 'X'.
+
+A region is captured by flipping all 'O's into 'X's in that surrounded region.
+
+Example:
+
+X X X X
+X O O X
+X X O X
+X O X X
+After running your function, the board should be:
+
+X X X X
+X X X X
+X X X X
+X O X X
+Explanation:
+
+Surrounded regions shouldn’t be on the border, which means that any 'O' on the border of the board are not flipped to 'X'.
+Any 'O' that is not on the border and it is not connected to an 'O' on the border will be flipped to 'X'.
+Two cells are connected if they are adjacent cells connected horizontally or vertically. */
+
+const solve = board => {
+    
+  if (!board.length) return;
+  
+  const dfs = (board, i, j) => {
+      // if out of bounds or land on an X or a # return 
+      if (i < 0 || i >= board.length || j < 0 || j >= board[0].length || board[i][j] !== 'O') return;
+      // change all O's to #'s
+      board[i][j] = '#';
+      // send all adjacent elements for the same treatment
+      dfs(board, i + 1, j);
+      dfs(board, i - 1, j);
+      dfs(board, i, j + 1);
+      dfs(board, i, j - 1);
+  }
+  // send all elements on the edge to dfs, looking for all O's
+  for (let i = 0; i < board.length; i++) {
+      dfs(board, i, 0);
+      dfs(board, i, board[0].length - 1);
+  }
+  for (let i = 0; i < board[0].length; i++) {
+      dfs(board, 0, i);
+      dfs(board, board.length - 1, i);
+  }
+  // iterate through entire board changing O's to X's and #'s back to O's
+  for (let i = 0; i < board.length; i++) {
+      for (let j = 0; j < board[0].length; j++) {
+          if (board[i][j] === 'O') board[i][j] = 'X';
+          if (board[i][j] === '#') board[i][j] = 'O';
+      }
+  }
+  
+};
+
+/* 108 Given an array where elements are sorted in ascending order, convert it to a height balanced BST.
+
+For this problem, a height-balanced binary tree is defined as a binary tree in which the depth of the two subtrees of every node never differ by more than 1.
+
+Example:
+
+Given the sorted array: [-10,-3,0,5,9],
+
+One possible answer is: [0,-3,9,-10,null,5], which represents the following height balanced BST:
+
+      0
+     / \
+   -3   9
+   /   /
+ -10  5 */
+function TreeNode(val) {
+  this.val = val;
+  this.left = this.right = null;
+}
+// this doesn't work in leetcode but seems to fill requirements
+// const sortedArrayToBST = nums => {
+
+//  if (!nums.length) return null;
+//  let mid = Math.floor((nums.length - 1) / 2);
+//  let root = new TreeNode(nums[mid]);
+//  if (nums.length === 1) return root;
+//  let nodeRight = new TreeNode(nums[mid + 1]);
+//  root.right = nodeRight;
+//  if (nums.length === 2) return root;
+//  let nodeLeft = new TreeNode(nums[mid - 1]);
+//  root.left = nodeLeft;
+
+//  let i = mid - 2;
+//  while (i >= 0) {
+//    let temp = new TreeNode(nums[i--]);
+//    nodeLeft.left = temp;
+//    nodeLeft = temp;
+//  }
+
+//  let j = mid + 2;
+//  while (j <= nums.length - 1) {
+//    let temp = new TreeNode(nums[j++]);
+//    nodeRight.right = temp;
+//    nodeRight = temp;
+//  }
+//  return root;
+
+// };
+
+// much more concise recursive solution, and works in leetcode
+const sortedArrayToBST = (nums, start = 0, end = nums.length - 1)  => {
+
+  if (start > end) return null;
+
+  let mid = Math.floor((start + end) / 2);
+  const root = new TreeNode(nums[mid]);
+  root.left = sortedArrayToBST(nums, start, mid - 1);
+  root.right = sortedArrayToBST(nums, mid + 1, end);
+  return root;
+};
+
+sortedArrayToBST([-5,-1,0,1,2,3,4,5,6])
+
+/* 147 Sort a linked list using insertion sort.
+
+
+A graphical example of insertion sort. The partial sorted list (black) initially contains only the first element in the list.
+With each iteration one element (red) is removed from the input data and inserted in-place into the sorted list
+ 
+
+Algorithm of Insertion Sort:
+
+Insertion sort iterates, consuming one input element each repetition, and growing a sorted output list.
+At each iteration, insertion sort removes one element from the input data, finds the location it belongs within the sorted list, and inserts it there.
+It repeats until no input elements remain.
+
+Example 1:
+
+Input: 4->2->1->3
+Output: 1->2->3->4
+Example 2:
+
+Input: -1->5->3->4->0
+Output: -1->0->3->4->5 */
+
+const insertionSortList = head => {
+
+  const dummy = new ListNode();
+  while (head !== null) {
+      let node = dummy;
+
+      while(node.next && node.next.val < head.val ) {
+          node = node.next;
+      };
+      
+      let temp = head.next;
+      head.next = node.next;
+      node.next = head;
+      head = temp;
+  };  
+  return dummy.next;
+
+};
+
+/* 94 Given a binary tree, return the inorder traversal of its nodes' values.
+
+Example:
+
+Input: [1,null,2,3]
+   1
+    \
+     2
+    /
+   3
+
+Output: [1,3,2]
+Follow up: Recursive solution is trivial, could you do it iteratively? */
+
+/**
+ * Definition for a binary tree node.
+ * function TreeNode(val) {
+ *     this.val = val;
+ *     this.left = this.right = null;
+ * }
+ */
+/**
+ * @param {TreeNode} root
+ * @return {number[]}
+ */
+// iterative:
+const inorderTraversal = root => {
+    
+  const res = [];
+  const stack = [];
+  
+  while (root || stack.length) {
+      while (root) {
+          stack.push(root);
+          root = root.left;
+      }
+      root = stack.pop();
+      res.push(root.val);
+      root = root.right;
+  }
+  return res;
+      
+};
+// and a far easier recursive solution:
+// const inorderTraversal = root => {
+    
+//   const res = [];
+//   if (!root) return res;
+  
+//   const _walk = node => {
+      
+//       if (node.left) _walk(node.left);
+//       res.push(node.val);
+//       if (node.right) _walk(node.right);
+//   }    
+//   _walk(root);
+  
+//   return res;
+// };
+
+/* 121 Say you have an array for which the ith element is the price of a given stock on day i.
+
+If you were only permitted to complete at most one transaction (i.e., buy one and sell one share of the stock), design an algorithm to find the maximum profit.
+
+Note that you cannot sell a stock before you buy one.
+
+Example 1:
+
+Input: [7,1,5,3,6,4]
+Output: 5
+Explanation: Buy on day 2 (price = 1) and sell on day 5 (price = 6), profit = 6-1 = 5.
+             Not 7-1 = 6, as selling price needs to be larger than buying price.
+Example 2:
+
+Input: [7,6,4,3,1]
+Output: 0
+Explanation: In this case, no transaction is done, i.e. max profit = 0. */
+
+const maxProfit = arr => {
+    
+  let profit = 0;
+  let min = arr[0];
+  let max = min;
+  for (let i = 1; i < arr.length; i++) {
+      if (arr[i] < min) {
+          min = arr[i];
+          max = min;
+      }
+      if (arr[i] > max) {
+          max = arr[i];
+          profit = Math.max(max - min, profit);
+      }
+  }
+  return profit;
+  
+};
+
+/* 136 Given a non-empty array of integers, every element appears twice except for one. Find that single one.
+
+Note:
+
+Your algorithm should have a linear runtime complexity. Could you implement it without using extra memory?
+
+Example 1:
+
+Input: [2,2,1]
+Output: 1
+Example 2:
+
+Input: [4,1,2,1,2]
+Output: 4 */
+
+const singleNumber = arr => {
+    
+  const set = new Set();
+  
+  for (let i of arr) {
+      if (set.has(i)) set.delete(i);
+      else set.add(i);
+  }
+  return [...set][0];
+  
+};
+
+const singleNumber = arr => {
+  // math solution, 2 * ( a + b + c) - ( a + a + b + b + c) = c  
+  // return 2 * ([...new Set(arr)].reduce( (a,b) => a + b, 0)) - arr.reduce( (a,b) => a + b, 0);
+  // bit manipulation: same complexity, less space O(1)
+  return arr.reduce( (a,b) => a ^ b);
+  
+};
+
+/* 31 Implement next permutation, which rearranges numbers into the lexicographically next greater permutation of numbers.
+
+If such arrangement is not possible, it must rearrange it as the lowest possible order (ie, sorted in ascending order).
+
+The replacement must be in-place and use only constant extra memory.
+
+Here are some examples. Inputs are in the left-hand column and its corresponding outputs are in the right-hand column.
+
+1,2,3 → 1,3,2
+3,2,1 → 1,2,3
+1,1,5 → 1,5,1 */
+
+const swap = (arr, i, j) => {
+  let temp = arr[i];
+  arr[i] = arr[j];
+  arr[j] = temp;
+}
+const reverse = (arr, i) => {
+  let j = arr.length -1;
+  while (i < j) {
+      swap(arr, i, j);
+      i++;
+      j--;
+  }
+}
+const nextPermutation = arr => {
+  let i = arr.length - 2;
+  while (i >=0 && arr[i] >= arr[i + 1]) {
+      i--;
+  }
+  if (i >= 0) {
+      let j = arr.length - 1;
+      while (arr[j] <= arr[i]) {
+          j--;
+      }
+      swap(arr, i, j);
+  }
+  reverse(arr, i + 1);
+};
+
+/* 83 Given a sorted linked list, delete all duplicates such that each element appear only once.
+
+Example 1:
+
+Input: 1->1->2
+Output: 1->2
+Example 2:
+
+Input: 1->1->2->3->3
+Output: 1->2->3 */
+
+/**
+ * Definition for singly-linked list.
+ * function ListNode(val) {
+ *     this.val = val;
+ *     this.next = null;
+ * }
+ */
+/**
+ * @param {ListNode} head
+ * @return {ListNode}
+ */
+const deleteDuplicates = head => {
+    
+  let curr = head;
+  while (curr && curr.next) {
+      if (curr.val === curr.next.val) curr.next = curr.next.next;
+      else curr = curr.next;
+  }
+  return head;
+  
+};
+
+/* 87 Given a string s1, we may represent it as a binary tree by partitioning it to two non-empty substrings recursively.
+
+Below is one possible representation of s1 = "great":
+
+    great
+   /    \
+  gr    eat
+ / \    /  \
+g   r  e   at
+           / \
+          a   t
+To scramble the string, we may choose any non-leaf node and swap its two children.
+
+For example, if we choose the node "gr" and swap its two children, it produces a scrambled string "rgeat".
+
+    rgeat
+   /    \
+  rg    eat
+ / \    /  \
+r   g  e   at
+           / \
+          a   t
+We say that "rgeat" is a scrambled string of "great".
+
+Similarly, if we continue to swap the children of nodes "eat" and "at", it produces a scrambled string "rgtae".
+
+    rgtae
+   /    \
+  rg    tae
+ / \    /  \
+r   g  ta  e
+       / \
+      t   a
+We say that "rgtae" is a scrambled string of "great".
+
+Given two strings s1 and s2 of the same length, determine if s2 is a scrambled string of s1.
+
+Example 1:
+
+Input: s1 = "great", s2 = "rgeat"
+Output: true
+Example 2:
+
+Input: s1 = "abcde", s2 = "caebd"
+Output: false */
+
+/**
+ * @param {string} s1
+ * @param {string} s2
+ * @return {boolean}
+ */
+const isScramble = (s1, s2) => {
+    
+  if (s1 == s2) return true;
+ // check if each string has same letters
+  const map = new Map();
+  for (let i of s1) {
+      if (map.has(i)) map.set(i, map.get(i) + 1);
+      else map.set(i, 1);
+  }
+  for (let i of s2) {
+      if (map.has(i)) map.set(i, map.get(i) - 1);
+      else return false;
+  }
+  for (let val of map.values()) {
+      if (val) return false;
+  } // check if strings are symetrical
+  for(let i = 1; i < s1.length; i++){
+      if (isScramble(s1.substring(0,i), s2.substring(0,i)) && isScramble(s1.substring(i), s2.substring(i))) return true;
+      if (isScramble(s1.substring(0,i), s2.substring(s2.length - i)) && isScramble(s1.substring(i), s2.substring(0,s2.length - i))) return true;
+  }
+  return false;
+  
+};
+// fibonacci recursive, recursive with memo, DP
+let calls = 0;
+
+const fibRecur = n => {
+  // recursive
+  if (n === 0) return 0;
+  if (n === 1) return 1;
+  console.log(++calls)
+  return fibRecur(n - 1) + fibRecur(n -2); 
+}
+
+// recursive with memoization
+const fibRecurMemo = (n, map = new Map([
+  [0, 0],
+  [1, 1]
+])) => {
+  console.log(++calls)
+  if (map.has(n)) return map.get(n);
+  else {
+    let f = fibRecurMemo(n - 1, map) + fibRecurMemo(n -2, map);
+    map.set(n, f);
+    return f;
+  }
+return map.get(n);
+
+}
+  // DP
+const fibDP = n => {
+  const res = [0, 1];
+  
+  for (let i = 2; i < n; i++) {
+    res.push(res[i - 2] + res[i - 1]);
+      console.log(++calls);
+  }
+  return res[n - 1];
+}
+
+// 0, 1, 2, 3, 5, 8, 13
+// fibRecur(7);// n = 7, calls = 20
+// fibRecurMemo(7);// n = 7, calls = 13
+fibDP(7); // n = 7, calls = 5
+
+let count = 0;
+const climbStairsTwoRecurs = steps => {
+  if (steps === 0) return 1;
+  if (steps < 0) return 0;
+  console.log(++count);
+  return climbStairsTwoRecurs(steps - 1) + climbStairsTwoRecurs(steps - 2);
+}
+
+const memo = new Map();
+const climbStairsTwoRecursMemo = steps => {
+  if (steps === 0) return 1;
+  if (steps < 0) return 0;
+  if (memo.has(steps)) return memo.get(steps);
+    console.log(++count);
+  memo.set(steps, (climbStairsTwoRecursMemo(steps - 1) + climbStairsTwoRecursMemo(steps - 2)))
+  return memo.get(steps);
+}
+
+const climbStairsTwoDP = steps => {
+  if (steps === 1) return 1;
+  let results = [1, 1, 2];
+  for (let i = 4; i <= steps; i++) {
+    results.push(results[i - 1] + results[i - 2]);
+    console.log(++count);
+  }
+  return results[steps];
+
+}
+
+// const climbStairsDP = (arr, steps) => {
+//   let res = [];
+//   res[0] = 1;
+//   for (let i = 1; i <= steps; i++){
+//     let temp = 0;
+//     for (let s of arr) {
+//       if (i - s >= 0) {
+//         temp += res[i - s];
+//       }
+//     }
+//     res.push(temp);
+//   }
+//   console.log(res);
+//   return res[steps];
+// }
+const climbStairsDP = (steps, n) => {
+  let res = new Array(n + 1).fill(0);
+  res[0] = 1;
+  for (let i = 1; i <= n; i++){
+    for (let s of steps) {
+      if (i - s >= 0) res[i] += res[i - s];
+    }
+  }
+  return res[n];
+}
+
+
+// climbStairsTwoRecurs(8); // 8: count 54, answer 34
+// climbStairsTwoRecursMemo(8); // 8: count 8, answer 34
+// climbStairsTwoDP(8); // 8: count 6, answer 34
+climbStairsDP([1, 2, 3], 8);// res with [1,2,3] and n 0 - 5: [1, 1, 2, 4, 7, 13]
