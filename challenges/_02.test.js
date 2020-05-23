@@ -8,10 +8,7 @@ Write a function that appends ' The end.' to a string, and returns the modified 
 
 ------------------------------------------------------------------------------------------------ */
 
-const appendTheEnd = (str) => {
-
-  return str;
-};
+const appendTheEnd = str => str + ' The end.';
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -26,9 +23,7 @@ appendFirstToLast(a);
 console.log(a) prints [1, 2, 3, 1]
 ------------------------------------------------------------------------------------------------ */
 
-const appendFirstToLast = (arr) => {
-
-};
+const appendFirstToLast = arr => arr.push(arr[0]);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -45,9 +40,7 @@ addBirthYearProperty(octavia, 1947);
 console.log(a) prints { fullName: 'Octavia Estelle Butler', yearBorn: 1947 }
 ------------------------------------------------------------------------------------------------ */
 
-const addBirthYearProperty = (obj, year) => {
-
-};
+const addBirthYearProperty = (obj, year) => obj.yearBorn = year;
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -62,9 +55,7 @@ setStatusAsAuthor(people);
 console.log(people[1].isAuthor) prints true
 ------------------------------------------------------------------------------------------------ */
 
-const setStatusAsAuthor = (people) => {
-
-};
+const setStatusAsAuthor = people => people.forEach(person => person.isAuthor = true);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -81,10 +72,7 @@ append(a, b);
 console.log(a) prints [1, 2, 3, 4]
 ------------------------------------------------------------------------------------------------ */
 
-const append = (arr1, arr2) => {
-
-
-};
+const append = (arr1, arr2) => arr1.push(...arr2);
 
 /* ------------------------------------------------------------------------------------------------
 
