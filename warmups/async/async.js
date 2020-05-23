@@ -4,7 +4,7 @@ const superagent = require('superagent');
 
 const fetchPeopleWithPromises = () => {
 
-  return superagent.get('https://swapi.co/api/people/')
+  return superagent.get('https://swapi.dev/api/people/')
     .then(response => {
       return response.body.results.map( person => {
         return superagent.get(person.url);
@@ -28,7 +28,7 @@ fetchPeopleWithPromises()
 
 const fetchPeopleWithAsync = async () => {
 
-  const peopleSet = await superagent.get('https://swapi.co/api/people');
+  const peopleSet = await superagent.get('https://swapi.dev/api/people');
 
   const people = (peopleSet.body && peopleSet.body.results) || [];
 

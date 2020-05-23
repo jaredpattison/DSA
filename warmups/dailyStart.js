@@ -23,9 +23,23 @@ let squares = map(numbers, (val=>val * val));
 console.log({squares});
 console.log('------------------\n\n');
 
+console.log('mapInPlace()');
+let mapNums = [...numbers];
+console.log({mapNums});
+mapInPlace(mapNums, (val=>val*val));
+console.log({mapNums});
+console.log('------------------\n\n');
+
 console.log('filter()');
-let odds = filter(numbers, (val => !!(val % 2)));
+let odds = filter(numbers, (val => val % 2));
 console.log({odds});
+console.log('------------------\n\n');
+
+console.log('filterInPlace()');
+let filterNums = [...numbers];
+console.log({filterNums});
+filterInPlace(filterNums, (val => val % 2));
+console.log({filterNums});
 console.log('------------------\n\n');
 
 console.log('reduce()');

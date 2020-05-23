@@ -11,51 +11,39 @@ const forLoop = arr => {
 };
 
 const whileLoop = arr => {
-
-  let temp = [...arr];
+  const temp = [...arr];
   while (temp.length) console.log(temp.shift());
-
 };
 
 const map = (arr, cb) => {
-
-  let res = [];
-  for (let val of arr) res.push(cb(val));
+  const res = [];
+  for (let i of arr) res.push(cb(i));
   return res;
-
 };
 
 const mapInPlace = (arr, cb) => {
-
-  for (let i = 0; i < arr.length; i++) {
-    arr[i] = cb(arr[i]);
-  }
-
+  for (let i = 0; i < arr.length; i++) arr[i] = cb(arr[i]);
 };
 
 const filter = (arr, cb) => {
-
-  let res = [];
-  for (let val of arr) if (cb(val)) res.push(val);
-  return res;
-
+  const temp = [];
+  for (let i of arr) {
+    if (cb(i)) temp.push(i);
+  }
+  return temp;
 };
 
 const filterInPlace = (arr, cb) => {
-  
   let j = 0;
-  for (let i = 0; i < arr.length; i++) {
-    if (cb(arr[i])) arr[j++] = arr[i];
+  for (let i of arr) {
+    if (cb(i)) arr[j++] = i;
   }
   arr.length = j;
-
 };
 
 const reduce = (arr, cb, acc) => {
-
   for (let i = 0; i < arr.length; i++) acc = cb(acc, arr[i], i);
   return acc;
-
 };
 
 // ---------------------------------------------------- //
@@ -115,8 +103,8 @@ const stuff = {
 
 const state = {people, stuff};
 const newPeople = ['Odie', ...people, 'Garfield'];
-const newStuff = {...stuff, cars: [...stuff.cars, 'hotrod']};
-const newState = {people: ['new dog', ...people, 'another dog'], stuff: {...stuff, cars: [...stuff.cars, 'third car']}};
+const newStuff = {...stuff, cars: [...stuff.cars, 'Ford']};
+const newState = {people: ['Lola', ...newPeople, 'Lilly'], stuff: {...stuff, cars: [...stuff.cars, 'Nissan']}};
 
 // ---------------------------------------------------- //
 

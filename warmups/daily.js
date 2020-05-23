@@ -52,7 +52,7 @@ console.log({squares});
 console.log('------------------\n\n');
 
 console.log('filter()');
-let odds = filter(numbers, (val => !!(val % 2)));
+let odds = filter(numbers, (val => (val % 2)));
 console.log({odds});
 console.log('------------------\n\n');
 
