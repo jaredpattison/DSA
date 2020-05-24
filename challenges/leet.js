@@ -39,6 +39,49 @@ const addTwoNumbers = (l1, l2) => {
     return dummyHead.next;
 };
 
+/* 4. Median of Two Sorted Arrays
+
+There are two sorted arrays nums1 and nums2 of size m and n respectively.
+
+Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
+
+You may assume arr1 and arr2 cannot be both empty.
+
+Example 1:
+
+arr1 = [1, 3]
+arr2 = [2]
+
+The median is 2.0
+Example 2:
+
+arr1 = [1, 2]
+arr2 = [3, 4]
+
+The median is (2 + 3)/2 = 2.5 */
+
+/**
+ * @param {number[]} arr1
+ * @param {number[]} arr2
+ * @return {number}
+ */
+
+const findMedianSortedArrays = (arr1, arr2) => {
+  let p1 = 0, p2 = 0, res;
+  const newArr = [], len = arr1.length + arr2.length;
+  while (p1 < arr1.length && p2 < arr2.length && newArr.length <= len) {
+    if (arr1[p1] < arr2[p2]) newArr.push(arr1[p1++]); 
+    else newArr.push(arr2[p2++]);
+  }
+  if (p1 < arr1.length) newArr.push(...arr1.slice(p1));
+  else newArr.push(...arr2.slice(p2));
+  if(newArr.length % 2 === 0) {
+    res = (newArr[len / 2] + newArr[(len / 2) - 1]) / 2;
+  } else res = newArr[(len - 1) / 2]
+  return res;
+};
+
+
 /* Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
 
 Integers in each row are sorted from left to right.
