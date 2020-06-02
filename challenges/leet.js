@@ -81,6 +81,46 @@ const findMedianSortedArrays = (arr1, arr2) => {
   return res;
 };
 
+/* 5. Longest Palindromic Substring
+Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+
+Example 1:
+
+Input: "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+Example 2:
+
+Input: "cbbd"
+Output: "bb" */
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+
+const longestPalindrome = s => {
+  if (!s || s.length <= 1) return s;
+  let start = 0, end = 0;
+  for (let i = 0; i < s.length - (end - start); i++) {
+    const len1 = grow(s, i, i);
+    const len2 = grow(s, i, i + 1);
+    const len = Math.max(len1, len2);
+    if (len > end - start) {
+      start = i - Math.floor((len - 1) / 2);
+      end = i + Math.floor(len / 2);
+    }
+  }
+  return s.slice(start, end + 1);
+};
+
+const grow = (s, start, end) => {
+  while (start >= 0 && end < s.length && s[start] === s[end]) {
+    start --;
+    end ++;
+  }
+  return end - start - 1;
+}
 
 /* Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
 
