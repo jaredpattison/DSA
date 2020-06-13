@@ -8,9 +8,15 @@ Write a function named greeting that takes in a string and returns the string in
 Then, write a function named speaker that takes in a string and a callback function. The speaker function should return the string in all uppercase letters only by invoking the callback.
 ------------------------------------------------------------------------------------------------ */
 
-const greeting = word => word.toUpperCase();
+const greeting = (word) => {
 
-const speaker = (message, callback) => callback(message);
+  return word.toUpperCase();
+};
+
+const speaker = (message, callback) => {
+
+  return callback(message);
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -28,11 +34,12 @@ Within the addNumbers function, invoke the callback function as many times as ne
 Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
-const addValues = (arr, value) => arr.push(value);
+const addValues = (arr, value) => {
+
+};
 
 const addNumbers = (num, arr, times, callback) => {
-  for (let i = 0; i < times; i++) callback(arr, num);
-  return arr;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -48,12 +55,11 @@ Return the modified array.
 ------------------------------------------------------------------------------------------------ */
 
 const removeOne = (num, arr) => {
-  num % 3 === 2 && arr.pop();
+
 };
 
 const removeElements = (arr, callback) => {
-  for (let num of arr) callback(num, arr);
-  return arr;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -63,8 +69,7 @@ Write a function named removeWithForEach that produces the same output as challe
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithForEach = (arr, callback) => {
-  arr.forEach(num => callback(num, arr));
-  return arr;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -78,10 +83,7 @@ This anonymous function should accept up to three arguments: the element, the in
 ------------------------------------------------------------------------------------------------ */
 
 const removeWithAnon = (arr) => {
-  arr.forEach(num => {
-    if (num % 3 === 2) arr.pop();
-  });
-  return arr;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -102,9 +104,7 @@ This function should use forEach to populate your grocery list based on the stor
 ------------------------------------------------------------------------------------------------ */
 
 const createList = (availableItems) => {
-  const list = [];
-  availableItems.forEach(item => item.available && list.push(item.name));
-  return list;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
@@ -122,24 +122,12 @@ Return the resulting output array.
 ------------------------------------------------------------------------------------------------ */
 
 const fizzbuzz = (arr) => {
-  const output = [];
-  arr.forEach(num => {
-    if (num % 3 === 0 && num % 5 === 0) output.push('Fizz Buzz');
-    else if (num % 3 === 0) output.push('Fizz');
-    else if (num % 5 === 0) output.push('Buzz');
-    else output.push(num);
-  });
-  return output;
+
 };
 
 /* ------------------------------------------------------------------------------------------------
+
 TESTS
-
-All the code below will verify that your functions are working to solve the challenges.
-
-DO NOT CHANGE any of the below code.
-
-Run your tests from the console: jest challenges-01.test.js
 
 ------------------------------------------------------------------------------------------------ */
 

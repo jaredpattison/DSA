@@ -12,7 +12,7 @@ For example:
 'hello world' returns false
 ------------------------------------------------------------------------------------------------ */
 
-const isNum = (input) => /\d/.test(input);
+const isNum = input => {};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -22,16 +22,15 @@ Write a function named isCapitalized that takes in a string. This function shoul
 Return an array containing all the matches.
 ------------------------------------------------------------------------------------------------ */
 
-const isCapitalized = str => str.match(/\b[A-Z]\w*/g);
+const isCapitalized = str => {};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 3
 
-Write a function named citiesAtoJ that takes in an array of city names and uses a regular expression pattern to return a new array 
-containing any cities that begin with the letters A through J, inclusive.
+Write a function named citiesAtoJ that takes in an array of city names and uses a regular expression pattern to return a new array containing any cities that begin with the letters A through J, inclusive.
 ------------------------------------------------------------------------------------------------ */
 
-const citiesAtoJ = arr => arr.join('\n').match(/^[A-J]\w*/gmi);
+const citiesAtoJ = arr => {};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 4
@@ -45,21 +44,19 @@ If the user enters any of these four inputs, return true. For any other input, r
 Do not use the vertical bar (pipe) in your pattern.
 ------------------------------------------------------------------------------------------------ */
 
-const matchMonth = input => /^[Oo]ct(ober)?$/.test(input);
+const matchMonth = input => {};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
 
-Write a function named noPunctuation that contains a regular expression pattern to find all of the words that contain a space immediately at the end of the word.
-Return an array of all such words, still containing the space at the end.
+Write a function named noPunctuation that contains a regular expression pattern to find all of the words that contain a space immediately at the end of the word. Return an array of all such words, still containing the space at the end.
 
-For example, if given the string "Hello, and have a wonderful day!", the word "Hello, " would not be returned because it is immediately followed by a comma.
-The word "day!" would not be returned because it is immediately followed by an exclamation point.
+For example, if given the string "Hello, and have a wonderful day!", the word "Hello, " would not be returned because it is immediately followed by a comma. The word "day!" would not be returned because it is immediately followed by an exclamation point.
 
 The expected output of "Hello, and have a wonderful day!" is ["and ", "have ", "a ", "wonderful "].
 ------------------------------------------------------------------------------------------------ */
 
-const noPunctuation = str => str.match(/\b\w+\s/g);
+const noPunctuation = str => {};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6
@@ -73,7 +70,7 @@ The function should return a string containing the consonants in their original 
 For example, 'Welcome to Code 301!' will return 'W_lc_m_ t_ C_d_ 301!'.
 ------------------------------------------------------------------------------------------------ */
 
-let hangman = str => str.replace(/[aeiou]/gi, '_');
+let hangman = str => {};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 7 - Stretch Goal
@@ -87,7 +84,7 @@ Hint: All of these words end with the letters "ells".
 
 const seashells = 'She sells seashells by the seashore. The shells she sells are surely seashells. So if she sells shells on the seashore, I\'m sure she sells seashore shells.';
 
-const findShells = str => str.match(/\bs\w*(ells)/gi);
+const findShells = str => {};
 
 /* ------------------------------------------------------------------------------------------------
 
