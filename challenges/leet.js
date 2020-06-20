@@ -1,3 +1,53 @@
+/* 1 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
+
+You may assume that each input would have exactly one solution, and you may not use the same element twice.
+
+Example:
+
+Given nums = [2, 7, 11, 15], target = 9,
+
+Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1]. */
+
+const twoSum = (nums, target) => {
+  for (let i = 0; i < nums.length; i++) {
+      for (let j = i + 1; j < nums.length; j++) {
+          if (nums[i] + nums[j] === target) return [i, j];
+      }
+  }
+};
+// hash map
+const twoSum = (nums, target) => {
+  const map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+      map.set(nums[i], i);
+      }
+  for (let i = 0; i < nums.length; i++) {
+      let comp = target - nums[i];
+      if (map.has(comp) && map.get(comp) !== i) return [i, map.get(comp)];
+  }   
+};
+
+// check hashmap as you build it
+const twoSum = (nums, target) => {
+  const map = new Map();
+  for (let i = 0; i < nums.length; i++) {
+      let comp = target - nums[i];
+      if (map.has(comp) && map.get(comp) !== i) return [i, map.get(comp)];
+      map.set(nums[i], i);
+      }    
+};
+
+// with simple object
+const twoSum = (arr, target) => {
+  const map = {};
+  for (let i = 0; i < arr.length; i++) {
+    const comp = target - arr[i];
+    if (map.hasOwnProperty(comp) && map[comp] !== i) return [map[comp], i];
+    map[arr[i]] = i;
+  }
+};
+
 /* 2. Add Two Numbers
 
 You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order and each of their nodes contain a single digit. Add the two numbers and return it as a linked list.
@@ -23,21 +73,153 @@ Explanation: 342 + 465 = 807. */
  * @return {ListNode}
  */
 const addTwoNumbers = (l1, l2) => {
-    const dummyHead = new NodeList(0);
-    let carry = 0, p = l1, q = l2, curr = dummyHead;
-    while (p || q) {
-      x = p ? p.val : 0;
-      y = q ? q.val : 0;
-      sum = p + q + carry;
-      curr.next = new NodeList(sum % 10);
-      carry = Math.floor(sum / 10);
-      curr = curr.next;
-      p = p?.next;
-      q = q?.next;
-    }
-    if (carry) curr.next = new NodeList(carry);
-    return dummyHead.next;
+  const dummyHead = new NodeList(0);
+  let carry = 0, p = l1, q = l2, curr = dummyHead;
+  while (p || q) {
+    x = p ? p.val : 0;
+    y = q ? q.val : 0;
+    sum = p + q + carry;
+    curr.next = new NodeList(sum % 10);
+    carry = Math.floor(sum / 10);
+    curr = curr.next;
+    p = p?.next;
+    q = q?.next;
+  }
+  if (carry) curr.next = new NodeList(carry);
+  return dummyHead.next;
 };
+
+/* 3 Given a string, find the length of the longest substring without repeating characters.
+
+Example 1:
+
+Input: "abcabcbb"
+Output: 3 
+Explanation: The answer is "abc", with the length of 3. 
+Example 2:
+
+Input: "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+Example 3:
+
+Input: "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3. 
+Note that the answer must be a substring, "pwke" is a subsequence and not a substring. */
+// optimized sliding window
+const lengthOfLongestSubstring = s => {
+
+  let ans = 0;
+  let dict = new Map();
+
+  for (let i = 0, f = 0; i < s.length; i++) {
+    if (dict.has(s[i])) {
+      f = Math.max(dict.get(s[i]) + 1, f)
+    }
+    ans = Math.max(ans, i - f + 1);
+    dict.set(s[i], i );
+  }
+  return ans;
+}
+
+const lengthOfLongestSubstring = s => {
+  let res = 0;
+  const dict = {};
+  for (let i = 0, f = 0; i < s.length; i++) {
+    if (dict.hasOwnProperty(s[i])) f = Math.max(dict[s[i]] + 1, f);
+    res = Math.max(res, i - f + 1);
+    dict[s[i]] = i;
+  }
+  return res;
+}
+
+lengthOfLongestSubstring('pwwkew')
+
+
+
+/* 4. Median of Two Sorted Arrays
+
+There are two sorted arrays nums1 and nums2 of size m and n respectively.
+
+Find the median of the two sorted arrays. The overall run time complexity should be O(log (m+n)).
+
+You may assume arr1 and arr2 cannot be both empty.
+
+Example 1:
+
+arr1 = [1, 3]
+arr2 = [2]
+
+The median is 2.0
+Example 2:
+
+arr1 = [1, 2]
+arr2 = [3, 4]
+
+The median is (2 + 3)/2 = 2.5 */
+
+/**
+ * @param {number[]} arr1
+ * @param {number[]} arr2
+ * @return {number}
+ */
+
+const findMedianSortedArrays = (arr1, arr2) => {
+  let p1 = 0, p2 = 0, res;
+  const newArr = [], len = arr1.length + arr2.length;
+  while (p1 < arr1.length && p2 < arr2.length && newArr.length <= len) {
+    if (arr1[p1] < arr2[p2]) newArr.push(arr1[p1++]); 
+    else newArr.push(arr2[p2++]);
+  }
+  if (p1 < arr1.length) newArr.push(...arr1.slice(p1));
+  else newArr.push(...arr2.slice(p2));
+  if(newArr.length % 2 === 0) {
+    res = (newArr[len / 2] + newArr[(len / 2) - 1]) / 2;
+  } else res = newArr[(len - 1) / 2]
+  return res;
+};
+
+/* 5. Longest Palindromic Substring
+Given a string s, find the longest palindromic substring in s. You may assume that the maximum length of s is 1000.
+
+Example 1:
+
+Input: "babad"
+Output: "bab"
+Note: "aba" is also a valid answer.
+Example 2:
+
+Input: "cbbd"
+Output: "bb" */
+
+/**
+ * @param {string} s
+ * @return {string}
+ */
+
+const longestPalindrome = s => {
+  if (!s || s.length <= 1) return s;
+  let start = 0, end = 0;
+  for (let i = 0; i < s.length; i++) {
+    const len1 = grow(s, i, i);
+    const len2 = grow(s, i, i + 1);
+    const len = Math.max(len1, len2);
+    if (len > end - start) {
+      start = i - Math.floor((len - 1) / 2);
+      end = i + Math.floor(len / 2);
+    }
+  }
+  return s.slice(start, end + 1);
+};
+
+const grow = (s, start, end) => {
+  while (start >= 0 && end < s.length && s[start] === s[end]) {
+    start --;
+    end ++;
+  }
+  return end - start - 1;
+}
 
 /* Write an efficient algorithm that searches for a value in an m x n matrix. This matrix has the following properties:
 
@@ -742,81 +924,6 @@ const canJump = (nums) => {
   return false;
 };
 
-/* 1 Given an array of integers, return indices of the two numbers such that they add up to a specific target.
-
-You may assume that each input would have exactly one solution, and you may not use the same element twice.
-
-Example:
-
-Given nums = [2, 7, 11, 15], target = 9,
-
-Because nums[0] + nums[1] = 2 + 7 = 9,
-return [0, 1]. */
-
-const twoSum = (nums, target) => {
-  for (let i = 0; i < nums.length; i++) {
-      for (let j = i + 1; j < nums.length; j++) {
-          if (nums[i] + nums[j] === target) return [i, j];
-      }
-  }
-};
-// hash map
-const twoSum = (nums, target) => {
-  const map = new Map();
-  for (let i = 0; i < nums.length; i++) {
-      map.set(nums[i], i);
-      }
-  for (let i = 0; i < nums.length; i++) {
-      let comp = target - nums[i];
-      if (map.has(comp) && map.get(comp) !== i) return [i, map.get(comp)];
-  }   
-};
-
-// check hashmap as you buils it
-const twoSum = (nums, target) => {
-  const map = new Map();
-  for (let i = 0; i < nums.length; i++) {
-      let comp = target - nums[i];
-      if (map.has(comp) && map.get(comp) !== i) return [i, map.get(comp)];
-      map.set(nums[i], i);
-      }    
-};
-
-/* 3 Given a string, find the length of the longest substring without repeating characters.
-
-Example 1:
-
-Input: "abcabcbb"
-Output: 3 
-Explanation: The answer is "abc", with the length of 3. 
-Example 2:
-
-Input: "bbbbb"
-Output: 1
-Explanation: The answer is "b", with the length of 1.
-Example 3:
-
-Input: "pwwkew"
-Output: 3
-Explanation: The answer is "wke", with the length of 3. 
-Note that the answer must be a substring, "pwke" is a subsequence and not a substring. */
-// optimized sliding window
-const lengthOfLongestSubstring = s => {
-
-  let n = s.length, ans = 0;
-  let dict = new Map();
-
-  for (let j = 0, i = 0; j < n; j++) {
-    if (dict.has(s[j])) {
-      i = Math.max(dict.get(s[j]) + 1, i)
-    }
-    ans = Math.max(ans, j - i + 1);
-    dict.set(s[j], j );
-  }
-  return ans;
-}
-
-lengthOfLongestSubstring('pwwkew')
 
 /* 45 Given an array of non-negative integers, you are initially positioned at the first index of the array.
 
@@ -1473,3 +1580,120 @@ const climbStairsDP = (steps, n) => {
 // climbStairsTwoRecursMemo(8); // 8: count 8, answer 34
 // climbStairsTwoDP(8); // 8: count 6, answer 34
 climbStairsDP([1, 2, 3], 8);// res with [1,2,3] and n 0 - 5: [1, 1, 2, 4, 7, 13]
+
+/* 40 Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sums to target.
+
+Each number in candidates may only be used once in the combination.
+
+Note:
+
+All numbers (including target) will be positive integers.
+The solution set must not contain duplicate combinations.
+Example 1:
+
+Input: candidates = [10,1,2,7,6,1,5], target = 8,
+A solution set is:
+[
+  [1, 7],
+  [1, 2, 5],
+  [2, 6],
+  [1, 1, 6]
+]
+Example 2:
+
+Input: candidates = [2,5,2,1,2], target = 5,
+A solution set is:
+[
+  [1,2,2],
+  [5]
+] */
+
+const combinationSum2 = (candidates, target) => {
+  candidates.sort( (a,b) => a - b);
+
+  const backtrack = (candidates, target, idx, res = [], path = []) => {
+      if (target == 0) return res.push([...path]);
+      if (target < 0) return;
+      for (let i = idx; i < candidates.length; i++) {
+          if(idx === i || candidates[i] !== candidates[i - 1]) {
+              path.push(candidates[i]);
+              backtrack(candidates, target - candidates[i], i + 1, res, path);
+              path.pop();
+          }
+      }
+      return res;
+  }
+  return backtrack(candidates, target, 0);
+};
+
+/* 47Given a collection of numbers that might contain duplicates, return all possible unique permutations.
+
+Example:
+
+Input: [1,1,2]
+Output:
+[
+  [1,1,2],
+  [1,2,1],
+  [2,1,1]
+] */
+
+const permuteUnique = nums => {
+  nums.sort();
+  return backTrack(nums);
+};
+
+const backTrack = (nums, res = [], path = []) => {
+  if (nums.length === 0) {
+    res.push([...path]);
+  }
+
+  let prev;
+  for (let i = 0; i < nums.length; i++) {
+    if (prev === nums[i]) continue; //ignore the situation of nums[i-1]==nums[i]
+
+    path.push(nums[i]);
+    prev = nums[i];
+    backTrack(nums.slice(0, i).concat(nums.slice(i + 1)), res, path);
+    path.pop();
+  }
+  return res;
+};
+
+permuteUnique([1, 1, 2]);
+
+/* 90 Given a collection of integers that might contain duplicates, nums, return all possible subsets (the power set).
+
+Note: The solution set must not contain duplicate subsets.
+
+Example:
+
+Input: [1,2,2]
+Output:P
+[
+  [2],
+  [1],
+  [1,2,2],
+  [2,2],
+  [1,2],
+  []
+] */
+
+const subsetsWithDup = nums => {
+  nums = nums.sort();
+  return backtrack(nums);
+};
+
+const backtrack = (nums, res = [], idx = 0, path = []) => {
+  res.push([...path]);
+
+  for (let i = idx; i < nums.length; i++) {
+    if (i > idx && nums[i] === nums[i - 1]) continue;
+
+    path.push(nums[i]);
+    backtrack(nums, res, i + 1, path);
+    path.pop();
+  }
+  return res;
+};
+
