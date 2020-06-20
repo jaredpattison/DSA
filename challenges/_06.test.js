@@ -11,9 +11,7 @@ const courseInfo = { name: 'Code 301', duration: { dayTrack: '4 weeks', eveningT
   topics: ['SMACSS', 'APIs', 'NodeJS', 'SQL', 'jQuery', 'functional programming'],
   finalExam: true };
 
-const getCourseKeys = obj => {
-
-}
+const getCourseKeys = obj => Object.keys(obj);
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 2
@@ -67,9 +65,7 @@ let characters = [
   }
 ]
 
-const totalCharacters = arr => {
-
-}
+const totalCharacters = arr => arr.length;
 
 /*------------------------------------------------------------------------------------------------
 CHALLENGE 3
@@ -79,7 +75,7 @@ Write a function named getHouses that returns a new array containing the names o
 
 const getHouses = arr => {
   const houses = [];
-
+  for (const character of arr) houses.push(character.house);
   return houses;
 }
 
@@ -96,8 +92,14 @@ hasChildrenValues(characters, 'Eddard') will return false
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenValues = (arr, character) => {
+  let flag = false;
+  arr.forEach(char => {
 
-}
+    if (char.name === character && Object.values(char.children)[0]) flag = true;
+  });
+
+  return flag;
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 5
@@ -108,8 +110,13 @@ The input and output of this function are the same as the input and output from 
 ------------------------------------------------------------------------------------------------ */
 
 const hasChildrenEntries = (arr, character) => {
+  let flag = false;
+  arr.forEach(char => {
+    if (char.name === character && Object.entries(char.children)[0]) flag = true;
+  });
 
-}
+  return flag;
+};
 
 /* ------------------------------------------------------------------------------------------------
 CHALLENGE 6 - Stretch Goal
@@ -122,7 +129,12 @@ For example: [{ house: 'Stark', members: 7 }, { house: 'Arryn', members: 3 }, ..
 ------------------------------------------------------------------------------------------------ */
 
 const houseSize = arr => {
-  const sizes = [];
+  const sizes = arr.map(obj => (
+    {
+      house: obj.house,
+      members: obj.spouse ? obj.children.length + 2 : obj.children.length + 1
+    }
+  ));
 
   return sizes;
 }
@@ -146,9 +158,14 @@ For example: [ { house: 'Stark', members: 6 }, { house: 'Arryn', members: 2 }, .
 const deceasedSpouses = ['Catelyn', 'Lysa', 'Robert', 'Khal Drogo', 'Alerie'];
 
 const houseSurvivors = arr => {
-  const survivors = [];
+  const sizes = arr.map(obj => (
+    {
+      house: obj.house,
+      members: obj.spouse && !deceasedSpouses.includes(obj.spouse) ? obj.children.length + 2 : obj.children.length + 1
+    }
+  ));
 
-  return survivors;
+  return sizes;
 }
 
 /* ------------------------------------------------------------------------------------------------
